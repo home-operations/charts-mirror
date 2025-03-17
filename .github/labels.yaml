@@ -4,8 +4,6 @@
   color: "027fa0"
 - name: renovate/github-action
   color: "027fa0"
-- name: renovate/grafana-dashboard
-  color: "027fa0"
 - name: renovate/github-release
   color: "027fa0"
 - name: renovate/helm
