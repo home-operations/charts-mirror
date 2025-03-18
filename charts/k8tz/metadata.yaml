@@ -1,0 +1,4 @@
+---
+registry: https://k8tz.github.io/k8tz/
+chart: k8tz
+version: 0.17.1
