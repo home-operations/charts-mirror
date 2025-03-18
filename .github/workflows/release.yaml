@@ -5,7 +5,6 @@ name: Release
 on:
   pull_request:
     branches: ["main"]
-    paths: ["charts/**/metadata.yaml"]
   push:
     branches: ["main"]
     paths: ["charts/**/metadata.yaml"]
