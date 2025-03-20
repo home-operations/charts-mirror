@@ -32,6 +32,9 @@ spec:
   url: oci://ghcr.io/home-operations/charts-mirror/${CHART}
   verify:
     provider: cosign
+    matchOIDCIdentity:
+      - issuer: "^https://token.actions.githubusercontent.com$"
+        subject: "^https://github.com/home-operations/charts-mirror.*$"
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
