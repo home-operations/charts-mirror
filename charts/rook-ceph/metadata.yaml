@@ -1,4 +1,4 @@
 ---
 registry: https://charts.rook.io/release
 chart: rook-ceph
-version: v1.16.5
+version: v1.16.6
