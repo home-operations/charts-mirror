@@ -1,4 +1,4 @@
 ---
 registry: https://charts.releases.teleport.dev/
 chart: teleport-cluster
-version: 17.3.4
+version: 17.4.0
