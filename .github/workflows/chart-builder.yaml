@@ -83,7 +83,7 @@ jobs:
         with:
           color: "0xFF0000"
           description: |
-            Chart: `${{ inputs.name }}`
+            Name: `${{ inputs.name }}`
             Version: `${{ inputs.version }}`
             [Rebuild](${{ github.server_url }}/${{ github.repository }}/actions/workflows/release.yaml)
           nodetail: true
