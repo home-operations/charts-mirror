@@ -56,7 +56,7 @@ jobs:
   build:
     if: ${{ needs.changed.outputs.charts != '[]' }}
     needs: ["changed"]
-    name: Build ${{ matrix.chart.name }}
+    name: Build ${{ matrix.chart.chart }}
     uses: ./.github/workflows/chart-builder.yaml
     permissions:
       contents: read
