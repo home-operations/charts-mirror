@@ -29,7 +29,7 @@ jobs:
         id: changed-files
         uses: bjw-s-labs/action-changed-files@b1144fc772fca235a50902c7bb6cc431cc7d8e27 # v0.3.2
         with:
-          patterns: apps/**/metadata.yaml
+          patterns: charts/**/metadata.yaml
 
   changed:
     if: ${{ needs.prepare.outputs.changed-files != '[]' || github.event_name == 'workflow_dispatch' }}
@@ -69,7 +69,7 @@ jobs:
       fail-fast: false
       max-parallel: 4
     with:
-      chart: ${{ matrix.chart.name }}
+      chart: ${{ matrix.chart.chart }}
       version: ${{ matrix.chart.version }}
       registry: ${{ matrix.chart.registry }}
       release: ${{ github.event_name == 'workflow_dispatch' && inputs.release || github.event_name == 'push' }}

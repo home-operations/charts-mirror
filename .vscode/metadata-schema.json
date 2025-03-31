@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "id": "rtrox-containers/metadata",
+  "title": "Chart Metadata",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "chart": {
+      "type": "string",
+      "description": "The name of the chart",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "version": {
+      "type": "string",
+      "description": "The version of the chart"
+    },
+    "registry": {
+      "type": "string",
+      "description": "The registry of the chart"
+    }
+  }
+}
