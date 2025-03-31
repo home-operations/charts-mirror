@@ -1,0 +1,4 @@
+---
+registry: https://1password.github.io/connect-helm-charts
+name: connect
+version: 1.17.0
