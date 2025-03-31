@@ -5,7 +5,7 @@ name: Chart Builder
 on:
   workflow_call:
     inputs:
-      chart:
+      name:
         type: string
         description: Chart Name
         required: true
@@ -59,7 +59,7 @@ jobs:
 
       - name: Pull Chart
         run: |
-          helm pull upstream/${{ inputs.chart }} --version ${{ inputs.version }}
+          helm pull upstream/${{ inputs.name }} --version ${{ inputs.version }}
 
       - if: ${{ inputs.release }}
         name: Push Chart
@@ -69,7 +69,7 @@ jobs:
       - if: ${{ inputs.release }}
         name: Sign artifacts with Cosign
         run: |
-          cosign sign --yes ghcr.io/${{ steps.vars.outputs.repository }}/${{ inputs.chart }}:${{ inputs.version }}
+          cosign sign --yes ghcr.io/${{ steps.vars.outputs.repository }}/${{ inputs.name }}:${{ inputs.version }}
 
   notify:
     if: ${{ inputs.release && !cancelled() }}
@@ -83,7 +83,7 @@ jobs:
         with:
           color: "0xFF0000"
           description: |
-            Chart: `${{ inputs.chart }}`
+            Chart: `${{ inputs.name }}`
             Version: `${{ inputs.version }}`
             [Rebuild](${{ github.server_url }}/${{ github.repository }}/actions/workflows/release.yaml)
           nodetail: true
