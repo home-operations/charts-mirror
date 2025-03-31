@@ -33,7 +33,7 @@ jobs:
       - name: Extract Chart values
         id: charts
         run: |
-          charts=$(yq eval-all --indent=0 --output-format=json "[.]" ${{ needs.prepare.outputs.changed-files }})
+          charts=$(yq eval-all --indent=0 --output-format=json "[.]" ${{ join(fromJSON(needs.prepare.outputs.changed-files), ' ') }})
           echo "charts=${charts}" >> $GITHUB_OUTPUT
 
   build:
