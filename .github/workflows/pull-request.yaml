@@ -45,7 +45,6 @@ jobs:
     permissions:
       contents: read
       packages: read
-    secrets: inherit
     strategy:
       matrix:
         chart: ${{ fromJSON(needs.changed.outputs.charts) }}
