@@ -24,7 +24,7 @@ on:
 
 jobs:
   build:
-    name: Build Charts
+    name: Build (${{ inputs.version }})
     runs-on: ubuntu-latest
     steps:
       - name: Setup Vars

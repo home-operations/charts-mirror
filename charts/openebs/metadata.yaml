@@ -1,4 +1,4 @@
 ---
 registry: https://openebs.github.io/openebs
-chart: openebs
+name: openebs
 version: 4.2.0

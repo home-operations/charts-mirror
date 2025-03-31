@@ -1,4 +1,4 @@
 ---
 registry: https://repos.emqx.io/charts
-chart: emqx-operator
+name: emqx-operator
 version: 2.2.28

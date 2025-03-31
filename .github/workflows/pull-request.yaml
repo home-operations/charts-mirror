@@ -39,7 +39,7 @@ jobs:
   build:
     if: ${{ needs.changed.outputs.charts != '[]' }}
     needs: ["changed"]
-    name: Build ${{ matrix.chart.chart }}
+    name: Build ${{ matrix.chart.name }}
     uses: ./.github/workflows/chart-builder.yaml
     permissions:
       contents: read
@@ -51,7 +51,7 @@ jobs:
       fail-fast: false
       max-parallel: 4
     with:
-      chart: ${{ matrix.chart.chart }}
+      chart: ${{ matrix.chart.name }}
       version: ${{ matrix.chart.version }}
       registry: ${{ matrix.chart.registry }}
       release: false

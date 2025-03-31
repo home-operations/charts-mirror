@@ -1,4 +1,4 @@
 ---
 registry: https://headlamp-k8s.github.io/headlamp/
-chart: headlamp
+name: headlamp
 version: 0.30.1

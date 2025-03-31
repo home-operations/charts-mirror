@@ -1,4 +1,4 @@
 ---
 registry: https://intel.github.io/helm-charts
-chart: intel-device-plugins-gpu
+name: intel-device-plugins-gpu
 version: 0.32.0

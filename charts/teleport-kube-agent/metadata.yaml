@@ -1,4 +1,4 @@
 ---
 registry: https://charts.releases.teleport.dev/
-chart: teleport-kube-agent
+name: teleport-kube-agent
 version: 17.4.1

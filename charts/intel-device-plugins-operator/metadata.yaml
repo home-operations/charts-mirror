@@ -1,4 +1,4 @@
 ---
 registry: https://intel.github.io/helm-charts
-chart: intel-device-plugins-operator
+name: intel-device-plugins-operator
 version: 0.32.0
