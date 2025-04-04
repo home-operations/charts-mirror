@@ -42,26 +42,38 @@ jobs:
 
             let container;
             if (user.type === 'Organization') {
-              const { data } = await github.rest.packages.getPackageForOrganization({
-                package_type: 'container',
-                package_name: `charts-mirror/${name}a`,
-                org: context.repo.owner,
-              });
-              container = data;
+              try {
+                const { data } = await github.rest.packages.getPackageForOrganization({
+                  package_type: 'container',
+                  package_name: `charts-mirror/${name}a`,
+                  org: context.repo.owner,
+                });
+                container = data;
+              } catch (error) {
+                if (error.status !== 404) {
+                  throw error;
+                }
+              }
             } else {
-              const { data } = await github.rest.packages.getPackageForUser({
-                package_type: 'container',
-                package_name: `charts-mirror/${name}a`,
-                username: context.repo.owner,
-              });
-              container = data;
+              try {
+                const { data } = await github.rest.packages.getPackageForUser({
+                  package_type: 'container',
+                  package_name: `charts-mirror/${name}a`,
+                  username: context.repo.owner,
+                });
+                container = data;
+              } catch (error) {
+                if (error.status !== 404) {
+                  throw error;
+                }
+              }
             }
 
             console.log(user);
             console.log(container);
-            console.log(`${container?.title ? true : false}`);
+            console.log(`${container !== null}`);
 
-            core.setOutput('new-app', `${container?.title ? true : false}`);
+            core.setOutput('new-app', `${container !== null}`);
 
   build:
     name: Build (${{ inputs.version }})
