@@ -53,6 +53,7 @@ jobs:
               });
             }
 
+            console.log(user);
             console.log(container);
             console.log(`${container?.title ? true : false}`);
 
