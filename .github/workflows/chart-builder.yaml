@@ -42,13 +42,13 @@ jobs:
             if (user.type === 'Organization') {
               let { data: container } = await github.rest.packages.getPackageForOrganization({
                 package_type: 'container',
-                package_name: '${{ inputs.name }}',
+                package_name: 'charts-mirror/${{ inputs.name }}',
                 org: '${{ github.repository_owner }}',
               });
             } else {
               let { data: container } = await github.rest.packages.getPackageForUser({
                 package_type: 'container',
-                package_name: '${{ inputs.name }}',
+                package_name: 'charts-mirror/${{ inputs.name }}',
                 username: '${{ github.repository_owner }}',
               });
             }
