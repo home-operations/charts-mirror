@@ -1,0 +1,4 @@
+---
+registry: https://pkgs.tailscale.com/helmcharts
+name: tailscale-operator
+version: 1.82.0
