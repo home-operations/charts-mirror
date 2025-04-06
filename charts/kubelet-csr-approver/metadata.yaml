@@ -1,0 +1,4 @@
+---
+registry: https://postfinance.github.io/kubelet-csr-approver
+name: kubelet-csr-approver
+version: 1.2.2
