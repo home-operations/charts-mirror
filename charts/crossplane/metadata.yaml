@@ -1,0 +1,4 @@
+---
+registry: https://charts.crossplane.io/preview
+name: crossplane
+version: 1.19.1
