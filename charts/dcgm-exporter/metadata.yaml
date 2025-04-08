@@ -1,4 +1,4 @@
 ---
 registry: https://nvidia.github.io/dcgm-exporter/helm-charts
 name: dcgm-exporter
-version: 4.0.4
+version: 4.1.0
