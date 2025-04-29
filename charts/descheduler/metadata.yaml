@@ -1,4 +1,0 @@
----
-registry: https://kubernetes-sigs.github.io/descheduler
-name: descheduler
-version: 0.32.2

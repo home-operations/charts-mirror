@@ -1,4 +1,0 @@
----
-registry: https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/master/charts
-name: csi-driver-nfs
-version: 4.11.0

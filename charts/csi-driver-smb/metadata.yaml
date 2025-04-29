@@ -1,4 +1,0 @@
----
-registry: https://raw.githubusercontent.com/kubernetes-csi/csi-driver-smb/master/charts
-name: csi-driver-smb
-version: v1.17.0

@@ -1,4 +1,0 @@
----
-registry: https://nvidia.github.io/k8s-device-plugin
-name: nvidia-device-plugin
-version: 0.17.1

@@ -1,4 +1,0 @@
----
-registry: https://grafana.github.io/helm-charts
-name: alloy
-version: 1.0.2

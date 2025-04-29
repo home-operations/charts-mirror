@@ -1,4 +1,0 @@
----
-registry: https://kubernetes-sigs.github.io/metrics-server
-name: metrics-server
-version: 3.12.2

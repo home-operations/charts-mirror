@@ -1,4 +1,0 @@
----
-registry: https://backube.github.io/helm-charts/
-name: volsync
-version: 0.12.1

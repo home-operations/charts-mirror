@@ -1,4 +1,0 @@
----
-registry: https://repos.emqx.io/charts
-name: emqx-operator
-version: 2.2.28

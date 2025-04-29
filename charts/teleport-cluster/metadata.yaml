@@ -1,4 +1,0 @@
----
-registry: https://charts.releases.teleport.dev/
-name: teleport-cluster
-version: 17.4.6

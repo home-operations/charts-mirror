@@ -1,4 +1,0 @@
----
-registry: https://kubernetes-sigs.github.io/external-dns
-name: external-dns
-version: 1.16.1
