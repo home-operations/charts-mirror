@@ -3,7 +3,7 @@
 This is our stop-gap mirror of OCI Helm Charts that can be used until maintainers of upstream charts publish them. See the issue [here](https://github.com/home-operations/charts-mirror/issues/8) for tracking the progress of upstream support for OCI charts added here.
 
 > [!CAUTION]
-> **Subscribe to the upstream issues or PRs tracking OCI support** because if you wish to use these charts understand it is **your responsiblity to make sure to change to the official OCI chart as soon as possible** as they will be deprecated here. I bare **no resposibility** for you **not paying close attention to this repository and the changes herein**. Once there is support upstream the OCI charts will remained published to this repo for 6 months, after which they will be pruned.
+> **Subscribe to the upstream issues or PRs tracking OCI support** because if you wish to use these charts understand it is **your responsiblity to make sure to change to the official OCI chart as soon as possible** as they will be deprecated here. I bear **no resposibility** for you **not paying close attention to this repository and the changes herein**. Once there is support upstream the OCI charts will remain published to this repo for 6 months, after which they will be pruned.
 
 ## Usage
 
@@ -58,7 +58,7 @@ spec:
 
 1. Verify the chart doesn't already have an official OCI Helm Chart.
 2. Create a new directory under `charts/` with the chart name.
-3. Add a `metadata.yaml` to that new directory file with the contents and update the variables to reflect the chart you are adding:
+3. Add a `metadata.yaml` to that new directory with the contents below and update the variables to reflect the chart you are adding:
 
     ```yaml
     ---
