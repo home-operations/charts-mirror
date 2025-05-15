@@ -1,4 +1,0 @@
----
-registry: https://metallb.github.io/metallb
-name: metallb
-version: 0.14.9
