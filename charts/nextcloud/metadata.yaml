@@ -1,4 +1,0 @@
----
-registry: https://nextcloud.github.io/helm/
-name: nextcloud
-version: 6.6.10
