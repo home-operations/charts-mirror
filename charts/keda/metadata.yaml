@@ -1,0 +1,4 @@
+---
+registry: https://kedacore.github.io/charts
+name: keda
+version: 2.17.1
