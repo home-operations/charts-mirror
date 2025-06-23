@@ -1,4 +1,4 @@
 ---
 registry: https://movetokube.github.io/postgres-operator/
 name: ext-postgres-operator
-version: 2.0.1
+version: 2.1.0
