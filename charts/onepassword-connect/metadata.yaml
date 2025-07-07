@@ -1,4 +1,4 @@
 ---
 registry: https://1password.github.io/connect-helm-charts
 name: connect
-version: 2.0.0
+version: 2.0.1
