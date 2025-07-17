@@ -1,0 +1,4 @@
+---
+registry: https://mongodb.github.io/helm-charts
+name: mongodb-kubernetes
+version: 1.2.0
