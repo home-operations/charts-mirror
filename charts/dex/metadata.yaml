@@ -1,0 +1,4 @@
+---
+registry: https://charts.dexidp.io
+name: dex
+version: 0.23.0
