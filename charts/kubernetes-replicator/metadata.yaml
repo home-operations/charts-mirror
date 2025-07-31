@@ -1,4 +1,0 @@
----
-registry: https://helm.mittwald.de
-name: kubernetes-replicator
-version: 2.12.0

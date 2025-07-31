@@ -1,4 +1,0 @@
----
-registry: https://mongodb.github.io/helm-charts
-name: community-operator
-version: 0.13.0

@@ -1,4 +1,0 @@
----
-registry: https://kubernetes-sigs.github.io/node-feature-discovery/charts
-name: node-feature-discovery
-version: 0.17.3
