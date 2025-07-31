@@ -1,0 +1,4 @@
+---
+registry: https://aws.github.io/eks-charts
+name: aws-load-balancer-controller
+version: 1.13.3
