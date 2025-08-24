@@ -2,4 +2,4 @@
 chartRegistry: https://k8tz.github.io/k8tz/
 chartName: k8tz
 chartVersion: 0.18.0
-chartNameOverride: k8tz
+artifactName: k8tz

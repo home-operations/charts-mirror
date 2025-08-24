@@ -2,4 +2,4 @@
 chartRegistry: https://nvidia.github.io/dcgm-exporter/helm-charts
 chartName: dcgm-exporter
 chartVersion: 4.5.0
-chartNameOverride: dcgm-exporter
+artifactName: dcgm-exporter

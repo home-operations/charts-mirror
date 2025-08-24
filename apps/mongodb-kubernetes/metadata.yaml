@@ -2,4 +2,4 @@
 chartRegistry: https://mongodb.github.io/helm-charts
 chartName: mongodb-kubernetes
 chartVersion: 1.2.0
-chartNameOverride: mongodb-kubernetes
+artifactName: mongodb-kubernetes

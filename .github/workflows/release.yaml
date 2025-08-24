@@ -56,7 +56,7 @@ jobs:
   build:
     if: ${{ needs.changed.outputs.apps != '[]' }}
     needs: ["changed"]
-    name: Build ${{ matrix.app.chartName }}
+    name: Build ${{ matrix.app.artifactName }}
     uses: ./.github/workflows/app-builder.yaml
     permissions:
       contents: read
@@ -72,7 +72,7 @@ jobs:
       chartName: ${{ matrix.app.chartName }}
       chartVersion: ${{ matrix.app.chartVersion }}
       chartRegistry: ${{ matrix.app.chartRegistry }}
-      chartNameOverride: ${{ matrix.app.chartNameOverride }}
+      artifactName: ${{ matrix.app.artifactName }}
       release: ${{ github.event_name == 'workflow_dispatch' && inputs.release || github.event_name == 'push' }}
 
   status:

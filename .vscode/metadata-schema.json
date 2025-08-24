@@ -21,7 +21,7 @@
       "type": "string",
       "description": "Registry of the Upstream Chart"
     },
-    "chartNameOverride": {
+    "artifactName": {
       "type": "string",
       "description": "Name of the Published Chart",
       "pattern": "^[a-z0-9-]+$"

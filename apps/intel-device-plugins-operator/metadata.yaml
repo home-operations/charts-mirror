@@ -2,4 +2,4 @@
 chartRegistry: https://intel.github.io/helm-charts
 chartName: intel-device-plugins-operator
 chartVersion: 0.32.1
-chartNameOverride: intel-device-plugins-operator
+artifactName: intel-device-plugins-operator

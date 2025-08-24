@@ -2,4 +2,4 @@
 chartRegistry: https://charts.longhorn.io
 chartName: longhorn
 chartVersion: 1.9.1
-chartNameOverride: longhorn
+artifactName: longhorn

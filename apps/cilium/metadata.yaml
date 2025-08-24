@@ -2,4 +2,4 @@
 chartRegistry: https://helm.cilium.io
 chartName: cilium
 chartVersion: 1.18.1
-chartNameOverride: cilium
+artifactName: cilium

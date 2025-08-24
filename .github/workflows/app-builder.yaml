@@ -17,7 +17,7 @@ on:
         type: string
         description: Registry of the Upstream Chart
         required: true
-      chartNameOverride:
+      artifactName:
         type: string
         description: Name of the Published Chart
         required: true
@@ -45,7 +45,7 @@ jobs:
         uses: ./.github/actions/app-exists
         id: app
         with:
-          app: ${{ steps.repository.outputs.name }}/${{ inputs.chartNameOverride }}
+          app: ${{ steps.repository.outputs.name }}/${{ inputs.artifactName }}
 
   build:
     name: Build (${{ inputs.chartVersion }})
@@ -81,7 +81,7 @@ jobs:
 
       - name: Override Chart Name
         run: |
-          yq --inplace '.name = "${{ inputs.chartNameOverride }}"' ./src/*/Chart.yaml
+          yq --inplace '.name = "${{ inputs.artifactName }}"' ./src/*/Chart.yaml
 
       - name: Package Chart
         run: |
@@ -96,7 +96,7 @@ jobs:
       - if: ${{ inputs.release }}
         name: Sign artifacts with Cosign
         run: |
-          cosign sign --yes ghcr.io/${{ github.repository }}/${{ inputs.chartNameOverride }}:${{ inputs.chartVersion }}
+          cosign sign --yes ghcr.io/${{ github.repository }}/${{ inputs.artifactName }}:${{ inputs.chartVersion }}
 
   release:
     if: ${{ inputs.release && needs.plan.outputs.app-exists != 'true' }}
@@ -134,7 +134,7 @@ jobs:
 
             ## 📦 Chart
 
-            **Name**: [${{ inputs.chartNameOverride }}](https://github.com/${{ github.repository }}/pkgs/container/${{ steps.repository.outputs.name }}%2F${{ inputs.chartNameOverride }})
+            **Name**: [${{ inputs.artifactName }}](https://github.com/${{ github.repository }}/pkgs/container/${{ steps.repository.outputs.name }}%2F${{ inputs.artifactName }})
           tag: ${{ steps.release.outputs.tag }}
           token: ${{ steps.app-token.outputs.token }}
 
@@ -150,7 +150,7 @@ jobs:
         with:
           color: "0xFF0000"
           description: |
-            Name: `${{ inputs.chartNameOverride }}`
+            Name: `${{ inputs.artifactName }}`
             Version: `${{ inputs.chartVersion }}`
             [Rebuild](${{ github.server_url }}/${{ github.repository }}/actions/workflows/release.yaml)
           nodetail: true

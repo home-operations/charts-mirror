@@ -2,4 +2,4 @@
 chartRegistry: https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/master/charts
 chartName: csi-driver-nfs
 chartVersion: 4.11.0
-chartNameOverride: csi-driver-nfs
+artifactName: csi-driver-nfs

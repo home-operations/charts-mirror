@@ -2,4 +2,4 @@
 chartRegistry: https://charts.crossplane.io/stable
 chartName: crossplane
 chartVersion: 2.0.2
-chartNameOverride: crossplane
+artifactName: crossplane

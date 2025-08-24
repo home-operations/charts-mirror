@@ -2,4 +2,4 @@
 chartRegistry: https://raw.githubusercontent.com/kubernetes-csi/csi-driver-smb/master/charts
 chartName: csi-driver-smb
 chartVersion: 1.18.0
-chartNameOverride: csi-driver-smb
+artifactName: csi-driver-smb

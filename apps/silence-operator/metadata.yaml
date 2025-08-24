@@ -2,4 +2,4 @@
 chartRegistry: https://giantswarm.github.io/control-plane-catalog/
 chartName: silence-operator
 chartVersion: 0.18.0
-chartNameOverride: silence-operator
+artifactName: silence-operator
