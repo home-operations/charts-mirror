@@ -2,3 +2,4 @@
 registry: https://charts.releases.teleport.dev/
 name: teleport-cluster
 version: 18.1.6
+artifactName: teleport-cluster

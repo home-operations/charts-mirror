@@ -2,3 +2,4 @@
 registry: https://helm.cilium.io
 name: cilium
 version: 1.18.1
+artifactName: cilium

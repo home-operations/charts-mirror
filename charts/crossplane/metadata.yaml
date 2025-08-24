@@ -2,3 +2,4 @@
 registry: https://charts.crossplane.io/stable
 name: crossplane
 version: 2.0.2
+artifactName: crossplane

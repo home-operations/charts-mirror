@@ -7,7 +7,7 @@ on:
     inputs:
       name:
         type: string
-        description: Chart Name
+        description: Chart Name (directory name under `charts/`)
         required: true
       reason:
         type: string

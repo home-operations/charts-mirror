@@ -72,6 +72,7 @@ jobs:
       name: ${{ matrix.chart.name }}
       version: ${{ matrix.chart.version }}
       registry: ${{ matrix.chart.registry }}
+      artifactName: ${{ matrix.chart.artifactName }}
       release: ${{ github.event_name == 'workflow_dispatch' && inputs.release || github.event_name == 'push' }}
 
   status:

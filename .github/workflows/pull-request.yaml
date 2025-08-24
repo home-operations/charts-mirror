@@ -53,6 +53,7 @@ jobs:
       name: ${{ matrix.chart.name }}
       version: ${{ matrix.chart.version }}
       registry: ${{ matrix.chart.registry }}
+      artifactName: ${{ matrix.chart.artifactName }}
       release: false
 
   status:

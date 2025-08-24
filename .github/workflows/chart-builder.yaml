@@ -7,15 +7,19 @@ on:
     inputs:
       name:
         type: string
-        description: Upstream Chart Name
+        description: Name of the Upstream Chart
         required: true
       version:
         type: string
-        description: Upstream Chart Version
+        description: Version of the Upstream Chart
         required: true
       registry:
         type: string
-        description: Upstream Chart Registry
+        description: Registry of the Upstream Chart
+        required: true
+      artifactName:
+        type: string
+        description: Name of the Published Artifact
         required: true
       release:
         type: boolean
@@ -41,7 +45,7 @@ jobs:
         uses: ./.github/actions/chart-exists
         id: chart
         with:
-          chart: ${{ steps.repository.outputs.name }}/${{ inputs.name }}
+          chart: ${{ steps.repository.outputs.name }}/${{ inputs.artifactName }}
 
   build:
     name: Build (${{ inputs.version }})
@@ -73,17 +77,26 @@ jobs:
 
       - name: Pull Chart
         run: |
-          helm pull upstream/${{ inputs.name }} --version ${{ inputs.version }}
+          helm pull upstream/${{ inputs.name }} --version ${{ inputs.version }} --untar --untardir ./src
+
+      - name: Override Chart Name
+        run: |
+          yq --inplace '.name = "${{ inputs.artifactName }}"' ./src/*/Chart.yaml
+
+      - name: Package Chart
+        run: |
+          mkdir -p dist
+          helm package ./src/* --version ${{ inputs.version }} --destination ./dist
 
       - if: ${{ inputs.release }}
         name: Push Chart
         run: |
-          helm push *.tgz oci://ghcr.io/${{ github.repository }}
+          helm push ./dist/*.tgz oci://ghcr.io/${{ github.repository }}
 
       - if: ${{ inputs.release }}
         name: Sign artifacts with Cosign
         run: |
-          cosign sign --yes ghcr.io/${{ github.repository }}/${{ inputs.name }}:${{ inputs.version }}
+          cosign sign --yes ghcr.io/${{ github.repository }}/${{ inputs.artifactName }}:${{ inputs.version }}
 
   release:
     if: ${{ inputs.release && needs.plan.outputs.chart-exists != 'true' }}
@@ -121,7 +134,7 @@ jobs:
 
             ## 📦 Chart
 
-            **Name**: [${{ inputs.name }}](https://github.com/${{ github.repository }}/pkgs/container/${{ steps.repository.outputs.name }}%2F${{ inputs.name }})
+            **Name**: [${{ inputs.artifactName }}](https://github.com/${{ github.repository }}/pkgs/container/${{ steps.repository.outputs.name }}%2F${{ inputs.artifactName }})
           tag: ${{ steps.release.outputs.tag }}
           token: ${{ steps.app-token.outputs.token }}
 
@@ -137,7 +150,7 @@ jobs:
         with:
           color: "0xFF0000"
           description: |
-            Name: `${{ inputs.name }}`
+            Name: `${{ inputs.artifactName }}`
             Version: `${{ inputs.version }}`
             [Rebuild](${{ github.server_url }}/${{ github.repository }}/actions/workflows/release.yaml)
           nodetail: true

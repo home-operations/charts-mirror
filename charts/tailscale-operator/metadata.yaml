@@ -2,3 +2,4 @@
 registry: https://pkgs.tailscale.com/helmcharts
 name: tailscale-operator
 version: 1.86.5
+artifactName: tailscale-operator

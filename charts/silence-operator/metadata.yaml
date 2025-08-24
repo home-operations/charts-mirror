@@ -2,3 +2,4 @@
 registry: https://giantswarm.github.io/control-plane-catalog/
 name: silence-operator
 version: 0.18.0
+artifactName: silence-operator
