@@ -22,7 +22,7 @@ jobs:
   changed:
     if: ${{ needs.prepare.outputs.changed-files != '[]' }}
     needs: ["prepare"]
-    name: Get Changed Charts
+    name: Get Changed Apps
     runs-on: ubuntu-latest
     outputs:
       charts: ${{ steps.apps.outputs.apps }}
@@ -30,7 +30,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
-      - name: Extract Chart values
+      - name: Extract App Values
         id: apps
         run: |
           apps=$(yq eval-all --indent=0 --output-format=json "[.]" ${{ join(fromJSON(needs.prepare.outputs.changed-files), ' ') }})
@@ -40,7 +40,7 @@ jobs:
     if: ${{ needs.changed.outputs.apps != '[]' }}
     needs: ["changed"]
     name: Build ${{ matrix.app.chartName }}
-    uses: ./.github/workflows/chart-builder.yaml
+    uses: ./.github/workflows/app-builder.yaml
     permissions:
       contents: read
       packages: read

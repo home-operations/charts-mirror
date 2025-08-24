@@ -31,7 +31,7 @@ jobs:
     name: Plan
     runs-on: ubuntu-latest
     outputs:
-      chart-exists: ${{ steps.chart.outputs.exists }}
+      app-exists: ${{ steps.app.outputs.exists }}
     steps:
       - name: Checkout
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
@@ -42,10 +42,10 @@ jobs:
           echo "name=${GITHUB_REPOSITORY#*/}" >> $GITHUB_OUTPUT
 
       - name: Check For Exising Chart
-        uses: ./.github/actions/chart-exists
-        id: chart
+        uses: ./.github/actions/app-exists
+        id: app
         with:
-          chart: ${{ steps.repository.outputs.name }}/${{ inputs.chartNameOverride }}
+          app: ${{ steps.repository.outputs.name }}/${{ inputs.chartNameOverride }}
 
   build:
     name: Build (${{ inputs.chartVersion }})
@@ -99,7 +99,7 @@ jobs:
           cosign sign --yes ghcr.io/${{ github.repository }}/${{ inputs.chartNameOverride }}:${{ inputs.chartVersion }}
 
   release:
-    if: ${{ inputs.release && needs.plan.outputs.chart-exists != 'true' }}
+    if: ${{ inputs.release && needs.plan.outputs.app-exists != 'true' }}
     name: Release
     needs: ["plan", "build"]
     runs-on: ubuntu-latest

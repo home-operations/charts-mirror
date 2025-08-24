@@ -1,27 +1,27 @@
 ---
 # yaml-language-server: $schema=https://json.schemastore.org/github-action.json
-name: Chart Exists
-description: Return true or false if the chart exists in the container registry
+name: Application Exists
+description: Return true or false if the application exists in the container registry
 
 inputs:
-  chart:
-    description: Chart Name
+  app:
+    description: Application Name
     required: true
 
 outputs:
   exists:
-    description: Chart Exists
-    value: ${{ steps.chart.outputs.exists }}
+    description: Application Exists
+    value: ${{ steps.application.outputs.exists }}
 
 runs:
   using: composite
   steps:
-    - name: Chart Exists
-      id: chart
+    - name: Application Exists
+      id: application
       uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
       with:
         script: |
-          const chartName = '${{ inputs.chart }}';
+          const applicationName = '${{ inputs.app }}';
 
           const { data: user } = await github.rest.users.getByUsername({
               username: context.repo.owner,
@@ -32,7 +32,7 @@ runs:
               try {
                   const { data } = await github.rest.packages.getPackageForOrganization({
                       package_type: 'container',
-                      package_name: chartName,
+                      package_name: applicationName,
                       org: context.repo.owner,
                   });
                   container = data;
@@ -45,7 +45,7 @@ runs:
               try {
                   const { data } = await github.rest.packages.getPackageForUser({
                       package_type: 'container',
-                      package_name: chartName,
+                      package_name: applicationName,
                       username: context.repo.owner,
                   });
                   container = data;
