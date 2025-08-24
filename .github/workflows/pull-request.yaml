@@ -17,7 +17,7 @@ jobs:
         id: changed-files
         uses: bjw-s-labs/action-changed-files@930cef8463348e168cab7235c47fe95a7a235f65 # v0.3.3
         with:
-          patterns: charts/**/metadata.yaml
+          patterns: apps/**/metadata.yaml
 
   changed:
     if: ${{ needs.prepare.outputs.changed-files != '[]' }}
@@ -25,35 +25,35 @@ jobs:
     name: Get Changed Charts
     runs-on: ubuntu-latest
     outputs:
-      charts: ${{ steps.charts.outputs.charts }}
+      charts: ${{ steps.apps.outputs.apps }}
     steps:
       - name: Checkout
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       - name: Extract Chart values
-        id: charts
+        id: apps
         run: |
-          charts=$(yq eval-all --indent=0 --output-format=json "[.]" ${{ join(fromJSON(needs.prepare.outputs.changed-files), ' ') }})
-          echo "charts=${charts}" >> $GITHUB_OUTPUT
+          apps=$(yq eval-all --indent=0 --output-format=json "[.]" ${{ join(fromJSON(needs.prepare.outputs.changed-files), ' ') }})
+          echo "apps=${apps}" >> $GITHUB_OUTPUT
 
   build:
-    if: ${{ needs.changed.outputs.charts != '[]' }}
+    if: ${{ needs.changed.outputs.apps != '[]' }}
     needs: ["changed"]
-    name: Build ${{ matrix.chart.name }}
+    name: Build ${{ matrix.app.chartName }}
     uses: ./.github/workflows/chart-builder.yaml
     permissions:
       contents: read
       packages: read
     strategy:
       matrix:
-        chart: ${{ fromJSON(needs.changed.outputs.charts) }}
+        app: ${{ fromJSON(needs.changed.outputs.apps) }}
       fail-fast: false
       max-parallel: 4
     with:
-      chartName: ${{ matrix.chart.name }}
-      chartVersion: ${{ matrix.chart.version }}
-      chartRegistry: ${{ matrix.chart.registry }}
-      chartNameOverride: ${{ matrix.chart.chartNameOverride }}
+      chartName: ${{ matrix.app.chartName }}
+      chartVersion: ${{ matrix.app.chartVersion }}
+      chartRegistry: ${{ matrix.app.chartRegistry }}
+      chartNameOverride: ${{ matrix.app.chartNameOverride }}
       release: false
 
   status:

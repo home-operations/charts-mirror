@@ -5,7 +5,7 @@ name: Release
 on:
   push:
     branches: ["main"]
-    paths: ["charts/**/metadata.yaml"]
+    paths: ["apps/**/metadata.yaml"]
   workflow_dispatch:
     inputs:
       chartName:
@@ -29,7 +29,7 @@ jobs:
         id: changed-files
         uses: bjw-s-labs/action-changed-files@930cef8463348e168cab7235c47fe95a7a235f65 # v0.3.3
         with:
-          patterns: charts/**/metadata.yaml
+          patterns: apps/**/metadata.yaml
 
   changed:
     if: ${{ needs.prepare.outputs.changed-files != '[]' || github.event_name == 'workflow_dispatch' }}
@@ -37,26 +37,26 @@ jobs:
     name: Get Changed Charts
     runs-on: ubuntu-latest
     outputs:
-      charts: ${{ steps.charts.outputs.charts }}
+      apps: ${{ steps.apps.outputs.apps }}
     steps:
       - name: Checkout
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       - name: Extract Chart values
-        id: charts
+        id: apps
         run: |
           if [[ "${{ github.event_name }}" != "workflow_dispatch" ]]; then
-              charts="${{ join(fromJSON(needs.prepare.outputs.changed-files), ' ') }}"
+              apps="${{ join(fromJSON(needs.prepare.outputs.changed-files), ' ') }}"
           else
-              charts="charts/${{ inputs.chartName }}/metadata.yaml"
+              apps="apps/${{ inputs.chartName }}/metadata.yaml"
           fi
-          charts=$(yq eval-all --indent=0 --output-format=json "[.]" $charts)
-          echo "charts=${charts}" >> $GITHUB_OUTPUT
+          apps=$(yq eval-all --indent=0 --output-format=json "[.]" $apps)
+          echo "apps=${apps}" >> $GITHUB_OUTPUT
 
   build:
-    if: ${{ needs.changed.outputs.charts != '[]' }}
+    if: ${{ needs.changed.outputs.apps != '[]' }}
     needs: ["changed"]
-    name: Build ${{ matrix.chart.name }}
+    name: Build ${{ matrix.app.chartName }}
     uses: ./.github/workflows/chart-builder.yaml
     permissions:
       contents: read
@@ -65,14 +65,14 @@ jobs:
     secrets: inherit
     strategy:
       matrix:
-        chart: ${{ fromJSON(needs.changed.outputs.charts) }}
+        app: ${{ fromJSON(needs.changed.outputs.apps) }}
       fail-fast: false
       max-parallel: 4
     with:
-      chartName: ${{ matrix.chart.name }}
-      chartVersion: ${{ matrix.chart.version }}
-      chartRegistry: ${{ matrix.chart.registry }}
-      chartNameOverride: ${{ matrix.chart.chartNameOverride }}
+      chartName: ${{ matrix.app.chartName }}
+      chartVersion: ${{ matrix.app.chartVersion }}
+      chartRegistry: ${{ matrix.app.chartRegistry }}
+      chartNameOverride: ${{ matrix.app.chartNameOverride }}
       release: ${{ github.event_name == 'workflow_dispatch' && inputs.release || github.event_name == 'push' }}
 
   status:

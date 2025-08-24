@@ -57,7 +57,7 @@ spec:
 ## Contributing
 
 1. Verify the chart doesn't already have an official OCI Helm Chart.
-2. Create a new directory under `charts/` with the chart name.
+2. Create a new directory under `apps/` with the chart name.
 3. Add a `metadata.yaml` to that new directory with the contents below and update the variables to reflect the chart you are adding:
 
     ```yaml

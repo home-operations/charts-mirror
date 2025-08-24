@@ -3,6 +3,6 @@
       "*.json5": "json5"
   },
   "yaml.schemas": {
-      ".vscode/metadata-schema.json": "/charts/*/metadata.yaml",
+      ".vscode/metadata-schema.json": "/apps/*/metadata.yaml",
   },
 }
