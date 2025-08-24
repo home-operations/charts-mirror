@@ -2,4 +2,4 @@
 chartRegistry: https://1password.github.io/connect-helm-charts
 chartName: connect
 chartVersion: 2.0.3
-chartNameOverride: connect
+chartNameOverride: onepassword-connect
