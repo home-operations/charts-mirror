@@ -1,5 +1,5 @@
 ---
-registry: https://helm.cilium.io
-name: cilium
-version: 1.18.1
-artifactName: cilium
+chartRegistry: https://helm.cilium.io
+chartName: cilium
+chartVersion: 1.18.1
+chartNameOverride: cilium

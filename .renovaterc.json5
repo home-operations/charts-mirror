@@ -7,7 +7,7 @@
       description: ["Process Chart versions"],
       managerFilePatterns: ["/(^|/)metadata\\.ya?ml$/"],
       matchStrings: [
-        "registry: (?<registryUrl>\\S+)\nname: (?<depName>\\S+)\nversion: (?<currentValue>\\S+)",
+        "chartRegistry: (?<registryUrl>\\S+)\nchartName: (?<depName>\\S+)\nchartVersion: (?<currentValue>\\S+)",
       ],
       datasourceTemplate: "helm",
     },

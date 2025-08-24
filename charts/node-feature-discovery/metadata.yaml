@@ -1,5 +1,5 @@
 ---
-registry: https://kubernetes-sigs.github.io/node-feature-discovery/charts
-name: node-feature-discovery
-version: 0.17.3
-artifactName: node-feature-discovery
+chartRegistry: https://kubernetes-sigs.github.io/node-feature-discovery/charts
+chartName: node-feature-discovery
+chartVersion: 0.17.3
+chartNameOverride: node-feature-discovery

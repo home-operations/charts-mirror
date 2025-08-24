@@ -1,5 +1,5 @@
 ---
-registry: https://charts.longhorn.io
-name: longhorn
-version: 1.9.1
-artifactName: longhorn
+chartRegistry: https://charts.longhorn.io
+chartName: longhorn
+chartVersion: 1.9.1
+chartNameOverride: longhorn

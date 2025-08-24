@@ -8,23 +8,23 @@
     "$schema": {
       "type": "string"
     },
-    "artifactName": {
-      "type": "string",
-      "description": "Name of the Published Artifact",
-      "pattern": "^[a-z0-9-]+$"
-    },
-    "name": {
+    "chartName": {
       "type": "string",
       "description": "Name of the Upstream Chart",
       "pattern": "^[a-z0-9-]+$"
     },
-    "version": {
+    "chartVersion": {
       "type": "string",
       "description": "Version of the Upstream Chart"
     },
-    "registry": {
+    "chartRegistry": {
       "type": "string",
       "description": "Registry of the Upstream Chart"
+    },
+    "chartNameOverride": {
+      "type": "string",
+      "description": "Name of the Published Chart",
+      "pattern": "^[a-z0-9-]+$"
     }
   }
 }

@@ -50,10 +50,10 @@ jobs:
       fail-fast: false
       max-parallel: 4
     with:
-      name: ${{ matrix.chart.name }}
-      version: ${{ matrix.chart.version }}
-      registry: ${{ matrix.chart.registry }}
-      artifactName: ${{ matrix.chart.artifactName }}
+      chartName: ${{ matrix.chart.name }}
+      chartVersion: ${{ matrix.chart.version }}
+      chartRegistry: ${{ matrix.chart.registry }}
+      chartNameOverride: ${{ matrix.chart.chartNameOverride }}
       release: false
 
   status:

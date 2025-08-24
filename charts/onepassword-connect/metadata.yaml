@@ -1,5 +1,5 @@
 ---
-registry: https://1password.github.io/connect-helm-charts
-name: connect
-version: 2.0.3
-artifactName: connect
+chartRegistry: https://1password.github.io/connect-helm-charts
+chartName: connect
+chartVersion: 2.0.3
+chartNameOverride: connect

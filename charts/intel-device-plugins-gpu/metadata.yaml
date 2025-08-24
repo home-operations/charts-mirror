@@ -1,5 +1,5 @@
 ---
-registry: https://intel.github.io/helm-charts
-name: intel-device-plugins-gpu
-version: 0.32.1
-artifactName: intel-device-plugins-gpu
+chartRegistry: https://intel.github.io/helm-charts
+chartName: intel-device-plugins-gpu
+chartVersion: 0.32.1
+chartNameOverride: intel-device-plugins-gpu

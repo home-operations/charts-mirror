@@ -1,5 +1,5 @@
 ---
-registry: https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/master/charts
-name: csi-driver-nfs
-version: 4.11.0
-artifactName: csi-driver-nfs
+chartRegistry: https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/master/charts
+chartName: csi-driver-nfs
+chartVersion: 4.11.0
+chartNameOverride: csi-driver-nfs

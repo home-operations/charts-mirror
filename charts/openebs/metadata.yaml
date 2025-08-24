@@ -1,5 +1,5 @@
 ---
-registry: https://openebs.github.io/openebs
-name: openebs
-version: 4.3.2
-artifactName: metadata
+chartRegistry: https://openebs.github.io/openebs
+chartName: openebs
+chartVersion: 4.3.2
+chartNameOverride: metadata

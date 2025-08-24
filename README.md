@@ -62,9 +62,10 @@ spec:
 
     ```yaml
     ---
-    registry: ${CHART_REGISTRY_URL}
-    name: ${CHART_NAME}
-    version: ${CHART_VERSION}
+    chartRegistry:     # Registry of the Upstream Chart
+    chartName:         # Name of the Upstream Chart
+    chartVersion:      # Version of the Upstream Chart
+    chartNameOverride: # Name of the Published Chart
     ```
 
 4. Open a PR with the link in the description to the upstream issue tracking OCI Helm Chart support.
