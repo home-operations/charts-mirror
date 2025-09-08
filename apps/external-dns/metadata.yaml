@@ -1,5 +1,5 @@
 ---
 chartRegistry: https://kubernetes-sigs.github.io/external-dns
 chartName: external-dns
-chartVersion: 1.18.0
+chartVersion: 1.19.0
 artifactName: external-dns
