@@ -1,0 +1,5 @@
+---
+chartRegistry: https://fluent.github.io/helm-charts
+chartName: fluent-bit
+chartVersion: 0.53.0
+artifactName: fluent-bit
