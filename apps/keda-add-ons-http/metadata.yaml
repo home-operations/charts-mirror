@@ -1,5 +1,5 @@
 ---
 chartRegistry: https://kedacore.github.io/charts
 chartName: keda-add-ons-http
-chartVersion: 0.10.0
+chartVersion: 0.11.0
 artifactName: keda-add-ons-http
