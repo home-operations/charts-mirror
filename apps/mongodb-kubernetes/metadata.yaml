@@ -1,5 +1,0 @@
----
-chartRegistry: https://mongodb.github.io/helm-charts
-chartName: mongodb-kubernetes
-chartVersion: 1.4.0
-artifactName: mongodb-kubernetes

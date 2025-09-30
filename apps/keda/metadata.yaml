@@ -1,5 +1,0 @@
----
-chartRegistry: https://kedacore.github.io/charts
-chartName: keda
-chartVersion: 2.17.2
-artifactName: keda

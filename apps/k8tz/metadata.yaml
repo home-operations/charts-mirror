@@ -1,5 +1,0 @@
----
-chartRegistry: https://k8tz.github.io/k8tz/
-chartName: k8tz
-chartVersion: 0.18.0
-artifactName: k8tz

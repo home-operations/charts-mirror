@@ -1,5 +1,0 @@
----
-chartRegistry: https://charts.longhorn.io
-chartName: longhorn
-chartVersion: 1.10.0
-artifactName: longhorn

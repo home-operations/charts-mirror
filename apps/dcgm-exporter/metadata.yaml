@@ -1,5 +1,0 @@
----
-chartRegistry: https://nvidia.github.io/dcgm-exporter/helm-charts
-chartName: dcgm-exporter
-chartVersion: 4.5.2
-artifactName: dcgm-exporter

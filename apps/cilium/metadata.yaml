@@ -1,5 +1,0 @@
----
-chartRegistry: https://helm.cilium.io
-chartName: cilium
-chartVersion: 1.18.2
-artifactName: cilium

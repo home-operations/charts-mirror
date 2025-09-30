@@ -1,5 +1,0 @@
----
-chartRegistry: https://helm.mittwald.de
-chartName: kubernetes-replicator
-chartVersion: 2.12.0
-artifactName: kubernetes-replicator

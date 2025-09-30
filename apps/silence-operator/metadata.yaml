@@ -1,5 +1,0 @@
----
-chartRegistry: https://giantswarm.github.io/control-plane-catalog/
-chartName: silence-operator
-chartVersion: 0.19.0
-artifactName: silence-operator
