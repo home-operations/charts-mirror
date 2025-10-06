@@ -1,5 +1,5 @@
 ---
 chartRegistry: https://christian-schlichtherle.github.io/synology-csi-chart
-chartName: synology-csi-chart
+chartName: synology-csi
 chartVersion: 0.10.1
 artifactName: synology-csi
