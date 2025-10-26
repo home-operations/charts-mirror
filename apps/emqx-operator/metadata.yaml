@@ -1,5 +1,0 @@
----
-chartRegistry: https://repos.emqx.io/charts
-chartName: emqx-operator
-chartVersion: 2.2.29
-artifactName: emqx-operator
