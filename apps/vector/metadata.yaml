@@ -1,0 +1,5 @@
+---
+chartRegistry: https://helm.vector.dev
+chartName: vector
+chartVersion: 0.46.0
+artifactName: vector
