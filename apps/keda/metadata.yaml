@@ -1,5 +1,5 @@
 ---
 chartRegistry: https://kedacore.github.io/charts
 chartName: keda
-chartVersion: 2.18.0
+chartVersion: 2.18.1
 artifactName: keda
