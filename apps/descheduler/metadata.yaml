@@ -1,5 +1,5 @@
 ---
 chartRegistry: https://kubernetes-sigs.github.io/descheduler
 chartName: descheduler
-chartVersion: 0.33.0
+chartVersion: 0.34.0
 artifactName: descheduler
