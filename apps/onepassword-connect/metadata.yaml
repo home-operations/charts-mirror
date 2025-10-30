@@ -1,5 +1,0 @@
----
-chartRegistry: https://1password.github.io/connect-helm-charts
-chartName: connect
-chartVersion: 2.0.5
-artifactName: onepassword-connect
