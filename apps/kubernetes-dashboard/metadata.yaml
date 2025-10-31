@@ -1,5 +1,5 @@
 ---
 chartRegistry: https://kubernetes.github.io/dashboard
 chartName: kubernetes-dashboard
-chartVersion: 7.10.0
+chartVersion: 7.14.0
 artifactName: kubernetes-dashboard
