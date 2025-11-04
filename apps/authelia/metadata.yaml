@@ -1,5 +1,5 @@
 ---
 chartRegistry: https://charts.authelia.com
 chartName: authelia
-chartVersion: 0.10.47
+chartVersion: 0.10.49
 artifactName: authelia
