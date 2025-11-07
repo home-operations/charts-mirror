@@ -1,5 +1,5 @@
 ---
 chartRegistry: https://charts.releases.teleport.dev/
 chartName: teleport-kube-agent
-chartVersion: 18.3.1
+chartVersion: 18.3.2
 artifactName: teleport-kube-agent
