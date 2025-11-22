@@ -1,5 +1,0 @@
----
-chartRegistry: https://openebs.github.io/openebs
-chartName: openebs
-chartVersion: 4.4.0
-artifactName: openebs
