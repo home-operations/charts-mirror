@@ -1,5 +1,5 @@
 ---
 chartRegistry: https://kubernetes-sigs.github.io/cluster-api-operator
 chartName: cluster-api-operator
-chartVersion: 0.24.0
+chartVersion: 0.24.1
 artifactName: cluster-api-operator
