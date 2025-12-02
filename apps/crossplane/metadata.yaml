@@ -1,5 +1,5 @@
 ---
 chartRegistry: https://charts.crossplane.io/stable
 chartName: crossplane
-chartVersion: 2.1.1
+chartVersion: 2.1.2
 artifactName: crossplane
