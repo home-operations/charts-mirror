@@ -1,0 +1,5 @@
+---
+chartRegistry: https://rocm.github.io/k8s-device-plugin/
+chartName: amd-gpu
+chartVersion: 0.20.0
+artifactName: amd-device-plugin
