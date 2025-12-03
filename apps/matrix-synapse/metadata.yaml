@@ -1,5 +1,5 @@
 ---
 chartRegistry: https://ananace.gitlab.io/charts
 chartName: matrix-synapse
-chartVersion: 1.143.0
+chartVersion: 3.12.16
 artifactName: matrix-synapse
