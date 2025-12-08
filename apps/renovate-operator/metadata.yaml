@@ -1,5 +1,0 @@
----
-chartRegistry: https://helm.mogenius.com/public
-chartName: renovate-operator
-chartVersion: 1.10.0
-artifactName: renovate-operator
