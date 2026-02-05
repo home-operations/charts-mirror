@@ -1,5 +1,5 @@
 ---
 chartRegistry: https://pkgs.tailscale.com/helmcharts
 chartName: tailscale-operator
-chartVersion: 1.92.5
+chartVersion: 1.94.1
 artifactName: tailscale-operator
