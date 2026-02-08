@@ -1,0 +1,5 @@
+---
+chartRegistry: https://smarter-project.github.io/smarter-device-manager
+chartName: smarter-device-manager
+chartVersion: 0.0.10
+artifactName: smarter-device-manager
