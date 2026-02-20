@@ -1,0 +1,5 @@
+---
+chartRegistry: https://charts.dexidp.io
+chartName: dex
+chartVersion: 0.24.0
+artifactName: dex
