@@ -1,5 +1,0 @@
----
-chartRegistry: https://aureq.github.io/cert-manager-webhook-ovh
-chartName: cert-manager-webhook-ovh
-chartVersion: 0.9.2
-artifactName: cert-manager-webhook-ovh
