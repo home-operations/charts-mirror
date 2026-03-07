@@ -1,0 +1,5 @@
+---
+chartRegistry: https://charts.fossorial.io
+chartName: newt
+chartVersion: 1.2.0
+artifactName: newt
