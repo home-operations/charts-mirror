@@ -37,6 +37,15 @@ jobs:
           app-id: ${{ secrets.BOT_APP_ID }}
           private-key: ${{ secrets.BOT_APP_PRIVATE_KEY }}
 
+      - name: Validate App Directory
+        env:
+          APP: ${{ inputs.app }}
+        run: |-
+          if [[ ! -d "./apps/${APP}" ]]; then
+            echo "::error::App directory './apps/${APP}' does not exist"
+            exit 1
+          fi
+
       - name: Delete Chart
         run: |
           rm -rf ./apps/${{ inputs.chartName }}
@@ -57,7 +66,8 @@ jobs:
   merge:
     if: ${{ inputs.release }}
     name: Merge (${{ inputs.chartName }})
-    needs: ["plan"]
+    needs:
+      - plan
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -87,7 +97,8 @@ jobs:
   announce:
     if: ${{ inputs.release }}
     name: Announce (${{ inputs.chartName }})
-    needs: ["merge"]
+    needs:
+      - merge
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
