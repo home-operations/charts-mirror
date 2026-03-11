@@ -1,5 +1,5 @@
 ---
 chartRegistry: https://perfectra1n.github.io/volsync/charts/
 chartName: volsync
-chartVersion: 0.18.4
+chartVersion: 0.18.5
 artifactName: volsync-perfectra1n
