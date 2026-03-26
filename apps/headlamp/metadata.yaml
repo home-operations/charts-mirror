@@ -1,5 +1,5 @@
 ---
 chartRegistry: https://kubernetes-sigs.github.io/headlamp/
 chartName: headlamp
-chartVersion: 0.40.1
+chartVersion: 0.41.0
 artifactName: headlamp
