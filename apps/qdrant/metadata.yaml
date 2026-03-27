@@ -1,5 +1,5 @@
 ---
 chartRegistry: https://qdrant.github.io/qdrant-helm
 chartName: qdrant
-chartVersion: 1.17.0
+chartVersion: 1.17.1
 artifactName: qdrant
