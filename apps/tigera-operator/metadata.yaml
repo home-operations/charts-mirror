@@ -1,5 +1,0 @@
----
-chartRegistry: https://docs.tigera.io/calico/charts/
-chartName: tigera-operator
-chartVersion: v3.31.4
-artifactName: tigera-operator
