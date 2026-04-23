@@ -1,5 +1,5 @@
 ---
 chartRegistry: https://nvidia.github.io/k8s-device-plugin
 chartName: nvidia-device-plugin
-chartVersion: 0.19.0
+chartVersion: 0.19.1
 artifactName: nvidia-device-plugin
