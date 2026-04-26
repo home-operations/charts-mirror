@@ -1,0 +1,5 @@
+---
+chartRegistry: https://pajikos.github.io/home-assistant-helm-chart/
+chartName: home-assistant
+chartVersion: 0.3.56
+artifactName: home-assistant
