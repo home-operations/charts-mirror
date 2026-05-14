@@ -1,5 +1,6 @@
 ---
-chartRegistry: https://kubernetes-sigs.github.io/external-dns
-chartName: external-dns
-chartVersion: 1.21.1
 artifactName: external-dns
+source:
+  helm:
+    registry: https://kubernetes-sigs.github.io/external-dns
+    version: 1.21.1

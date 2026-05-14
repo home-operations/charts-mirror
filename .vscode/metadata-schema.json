@@ -1,30 +1,72 @@
 {
-  "$schema": "http://json-schema.org/draft-06/schema#",
-  "id": "rtrox-containers/metadata",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "id": "home-operations/charts-mirror/metadata",
   "title": "Chart Metadata",
   "type": "object",
   "additionalProperties": false,
+  "required": ["artifactName", "source"],
   "properties": {
     "$schema": {
       "type": "string"
     },
-    "chartName": {
-      "type": "string",
-      "description": "Name of the Upstream Chart",
-      "pattern": "^[a-z0-9-]+$"
-    },
-    "chartVersion": {
-      "type": "string",
-      "description": "Version of the Upstream Chart"
-    },
-    "chartRegistry": {
-      "type": "string",
-      "description": "Registry of the Upstream Chart"
-    },
     "artifactName": {
       "type": "string",
-      "description": "Name of the Published Chart",
+      "description": "Name of the published chart",
       "pattern": "^[a-z0-9-]+$"
+    },
+    "source": {
+      "type": "object",
+      "description": "Where to fetch the chart from. Exactly one of `helm` or `git` must be set.",
+      "additionalProperties": false,
+      "oneOf": [
+        { "required": ["helm"] },
+        { "required": ["git"] }
+      ],
+      "properties": {
+        "helm": {
+          "type": "object",
+          "description": "Pull from a traditional Helm repository",
+          "additionalProperties": false,
+          "required": ["registry", "version"],
+          "properties": {
+            "registry": {
+              "type": "string",
+              "format": "uri",
+              "description": "Upstream Helm repository URL"
+            },
+            "version": {
+              "type": "string",
+              "description": "Upstream chart version to fetch (also used as the published OCI tag)"
+            },
+            "chart": {
+              "type": "string",
+              "pattern": "^[a-z0-9-]+$",
+              "description": "Upstream chart name (defaults to artifactName)"
+            }
+          }
+        },
+        "git": {
+          "type": "object",
+          "description": "Pull from a git repository and package a chart subdirectory",
+          "additionalProperties": false,
+          "required": ["repository", "path", "tag"],
+          "properties": {
+            "repository": {
+              "type": "string",
+              "format": "uri",
+              "description": "Upstream git repository URL"
+            },
+            "path": {
+              "type": "string",
+              "description": "Path to the chart directory within the repository"
+            },
+            "tag": {
+              "type": "string",
+              "description": "Git tag to clone (also used as the published OCI tag)"
+            }
+          }
+        }
+      }
     }
   }
 }

@@ -4,12 +4,23 @@
   customManagers: [
     {
       customType: "regex",
-      description: ["Process Chart versions"],
+      description: ["Process Helm-sourced charts"],
       managerFilePatterns: ["/(^|/)metadata\\.ya?ml$/"],
       matchStrings: [
-        "chartRegistry: (?<registryUrl>\\S+)\nchartName: (?<depName>\\S+)\nchartVersion: (?<currentValue>\\S+)",
+        "artifactName:\\s+(?<artifactName>\\S+)\\s+source:\\s+helm:\\s+registry:\\s+(?<registryUrl>\\S+)\\s+version:\\s+(?<currentValue>\\S+)(?:\\s+chart:\\s+(?<chart>\\S+))?",
       ],
       datasourceTemplate: "helm",
+      depNameTemplate: "{{#if chart}}{{chart}}{{else}}{{artifactName}}{{/if}}",
+    },
+    {
+      customType: "regex",
+      description: ["Process git-sourced charts"],
+      managerFilePatterns: ["/(^|/)metadata\\.ya?ml$/"],
+      matchStrings: [
+        "source:\\s+git:\\s+repository:\\s+(?<depName>\\S+)\\s+path:\\s+\\S+\\s+tag:\\s+(?<currentValue>\\S+)",
+      ],
+      datasourceTemplate: "git-tags",
+      extractVersionTemplate: "^v?(?<version>.+)$",
     },
   ],
   packageRules: [

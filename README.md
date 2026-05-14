@@ -68,20 +68,37 @@ To add a new chart to this repository:
 
 3. **Add chart metadata**
 
-   Inside the new directory, create a `metadata.yaml` file with the following structure.
-   Update the fields to match the upstream chart details:
+   Inside the new directory, create a `metadata.yaml` file. The `source:` block tells the builder where to fetch the chart from — set exactly one of `helm` or `git`.
+
+   **Helm-sourced** (the upstream publishes a traditional Helm repository):
 
    ```yaml
    ---
-   chartRegistry: <Registry of the upstream chart>
-   chartName: <Name of the upstream chart>
-   chartVersion: <Version of the upstream chart>
-   artifactName: <Name of the published chart>
+   artifactName: <name of the published chart>
+   source:
+     helm:
+       registry: <upstream Helm repository URL>
+       version: <upstream chart version>
+       # chart: <upstream chart name>   # optional, defaults to artifactName
    ```
+
+   **Git-sourced** (the upstream ships chart manifests in a git repository but does not publish a Helm chart):
+
+   ```yaml
+   ---
+   artifactName: <name of the published chart>
+   source:
+     git:
+       repository: <upstream git repository URL>
+       path: <path to the chart directory within the repository>
+       tag: <git tag to clone>
+   ```
+
+   The chart is published to GHCR under `artifactName` with `source.helm.version` (or `source.git.tag`) used as the OCI tag.
 
 4. **Request upstream OCI support**
 
-   If the upstream project does not yet publish OCI Helm Charts, open an issue in their application or chart repository requesting OCI Helm Chart support.
+   If the upstream project does not yet publish OCI Helm Charts (or any Helm chart at all, for git-sourced entries), open an issue in their application or chart repository requesting OCI Helm Chart support.
 
 5. **Submit a pull request**
 

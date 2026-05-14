@@ -1,5 +1,6 @@
 ---
-chartRegistry: https://christian-schlichtherle.github.io/synology-csi-chart
-chartName: synology-csi
-chartVersion: 0.11.1
 artifactName: synology-csi
+source:
+  helm:
+    registry: https://christian-schlichtherle.github.io/synology-csi-chart
+    version: 0.11.1

@@ -1,5 +1,6 @@
 ---
-chartRegistry: https://charts.longhorn.io
-chartName: longhorn
-chartVersion: 1.11.2
 artifactName: longhorn
+source:
+  helm:
+    registry: https://charts.longhorn.io
+    version: 1.11.2
