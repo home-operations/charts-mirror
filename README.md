@@ -94,7 +94,7 @@ To add a new chart to this repository:
        tag: <git tag to clone>
    ```
 
-   The chart is published to GHCR under `artifactName` with `source.helm.version` (or `source.git.tag`) used as the OCI tag.
+   The chart is published to GHCR under `artifactName`, with any leading `v` stripped from `source.helm.version` (or `source.git.tag`) so the OCI tag is SemVer-clean. The upstream version/tag is still fetched verbatim.
 
 4. **Request upstream OCI support**
 
