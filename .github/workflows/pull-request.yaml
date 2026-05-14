@@ -52,10 +52,8 @@ jobs:
       fail-fast: false
       max-parallel: 4
     with:
-      chartName: ${{ matrix.app.chartName }}
-      chartVersion: ${{ matrix.app.chartVersion }}
-      chartRegistry: ${{ matrix.app.chartRegistry }}
       artifactName: ${{ matrix.app.artifactName }}
+      source: ${{ toJSON(matrix.app.source) }}
       release: false
 
   status:

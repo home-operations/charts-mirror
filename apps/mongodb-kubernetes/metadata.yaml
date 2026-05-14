@@ -1,5 +1,6 @@
 ---
-chartRegistry: https://mongodb.github.io/helm-charts
-chartName: mongodb-kubernetes
-chartVersion: 1.8.0
 artifactName: mongodb-kubernetes
+source:
+  helm:
+    registry: https://mongodb.github.io/helm-charts
+    version: 1.8.0

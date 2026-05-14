@@ -1,5 +1,6 @@
 ---
-chartRegistry: https://grafana.github.io/helm-charts
-chartName: alloy
-chartVersion: 1.8.1
 artifactName: alloy
+source:
+  helm:
+    registry: https://grafana.github.io/helm-charts
+    version: 1.8.1

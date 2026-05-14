@@ -1,5 +1,6 @@
 ---
-chartRegistry: https://kubernetes-sigs.github.io/metrics-server
-chartName: metrics-server
-chartVersion: 3.13.0
 artifactName: metrics-server
+source:
+  helm:
+    registry: https://kubernetes-sigs.github.io/metrics-server
+    version: 3.13.0

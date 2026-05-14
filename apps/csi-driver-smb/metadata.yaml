@@ -1,5 +1,6 @@
 ---
-chartRegistry: https://raw.githubusercontent.com/kubernetes-csi/csi-driver-smb/master/charts
-chartName: csi-driver-smb
-chartVersion: 1.20.1
 artifactName: csi-driver-smb
+source:
+  helm:
+    registry: https://raw.githubusercontent.com/kubernetes-csi/csi-driver-smb/master/charts
+    version: 1.20.1
