@@ -42,12 +42,15 @@ jobs:
         env:
           SOURCE: ${{ inputs.source }}
         run: |
+          # The published OCI tag is always SemVer-clean (any leading "v" stripped).
+          # The upstream fetch steps below re-read the verbatim source value so
+          # `helm pull --version` and `git clone --branch` hit the real upstream ref.
           if jq -e 'has("helm")' <<< "$SOURCE" > /dev/null; then
             echo "type=helm" >> $GITHUB_OUTPUT
-            echo "version=$(jq -r '.helm.version' <<< "$SOURCE")" >> $GITHUB_OUTPUT
+            echo "version=$(jq -r '.helm.version' <<< "$SOURCE" | sed 's/^v//')" >> $GITHUB_OUTPUT
           elif jq -e 'has("git")' <<< "$SOURCE" > /dev/null; then
             echo "type=git" >> $GITHUB_OUTPUT
-            echo "version=$(jq -r '.git.tag' <<< "$SOURCE")" >> $GITHUB_OUTPUT
+            echo "version=$(jq -r '.git.tag' <<< "$SOURCE" | sed 's/^v//')" >> $GITHUB_OUTPUT
           else
             echo "::error::Source must define exactly one of: helm, git"
             exit 1
@@ -90,16 +93,18 @@ jobs:
         run: |
           registry=$(jq -r '.helm.registry' <<< "$SOURCE")
           chart=$(jq -r --arg fallback "$ARTIFACT_NAME" '.helm.chart // $fallback' <<< "$SOURCE")
+          upstream_version=$(jq -r '.helm.version' <<< "$SOURCE")
           helm repo add upstream "$registry"
           helm repo update upstream
-          helm pull "upstream/$chart" --version "$VERSION" --untar --untardir ./src
+          helm pull "upstream/$chart" --version "$upstream_version" --untar --untardir ./src
 
       - if: ${{ needs.plan.outputs.source-type == 'git' }}
         name: Fetch Git Chart
         run: |
           repository=$(jq -r '.git.repository' <<< "$SOURCE")
           path=$(jq -r '.git.path' <<< "$SOURCE")
-          git clone --depth 1 --branch "$VERSION" "$repository" ./git-src
+          tag=$(jq -r '.git.tag' <<< "$SOURCE")
+          git clone --depth 1 --branch "$tag" "$repository" ./git-src
           mkdir -p ./src
           cp -r "./git-src/${path}" "./src/$(basename "$path")"
 
