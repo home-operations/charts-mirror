@@ -105,11 +105,3 @@ To add a new chart to this repository:
    Open a PR in this repository:
    - Include the link to the upstream issue (from step 4) in the PR description.
    - Ensure your PR only adds the new chart directory and metadata.
-
-## Maintaining a Fork
-
-Forking this repository is fairly straightforward, but there are a couple of important notes:
-
-1. You’ll need to set up a GitHub Bot for Renovate, you can find instructions for that outlined [here](https://github.com/renovatebot/github-action).
-
-2. If your GitHub username or the repository name includes uppercase letters, you’ll need to update the workflows. This is because pushing to GHCR requires both the username and repository name to be entirely lowercase.
