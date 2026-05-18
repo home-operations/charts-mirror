@@ -20,7 +20,7 @@
         "source:\\s+git:\\s+repository:\\s+(?<depName>\\S+)\\s+path:\\s+\\S+\\s+tag:\\s+(?<currentValue>\\S+)",
       ],
       datasourceTemplate: "git-tags",
-      extractVersionTemplate: "^v?(?<version>.+)$",
+      versioningTemplate: "semver-coerced",
     },
   ],
   packageRules: [
