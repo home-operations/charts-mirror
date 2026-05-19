@@ -207,36 +207,43 @@ checksum = "sha256:2aee32f1de46a20672f48c25df3018839798bd509143f2ce05fdab1550ff5
 url = "https://github.com/mikefarah/yq/releases/download/v4.53.2/yq_windows_amd64.exe"
 
 [[tools."aqua:sigstore/cosign"]]
-version = "2.6.3"
+version = "3.0.6"
 backend = "aqua:sigstore/cosign"
 
 [tools."aqua:sigstore/cosign"."platforms.linux-arm64"]
-checksum = "sha256:b7c23659a50a59fd8eec44b87188e9062157d0c87796cac7b38727e5390c4917"
-url = "https://github.com/sigstore/cosign/releases/download/v2.6.3/cosign-linux-arm64"
+checksum = "sha256:bedac92e8c3729864e13d4a17048007cfafa79d5deca993a43a90ffe018ef2b8"
+url = "https://github.com/sigstore/cosign/releases/download/v3.0.6/cosign-linux-arm64"
+provenance = "cosign"
 
 [tools."aqua:sigstore/cosign"."platforms.linux-arm64-musl"]
-checksum = "sha256:b7c23659a50a59fd8eec44b87188e9062157d0c87796cac7b38727e5390c4917"
-url = "https://github.com/sigstore/cosign/releases/download/v2.6.3/cosign-linux-arm64"
+checksum = "sha256:bedac92e8c3729864e13d4a17048007cfafa79d5deca993a43a90ffe018ef2b8"
+url = "https://github.com/sigstore/cosign/releases/download/v3.0.6/cosign-linux-arm64"
+provenance = "cosign"
 
 [tools."aqua:sigstore/cosign"."platforms.linux-x64"]
-checksum = "sha256:7c78a7f2efc00088bd788a758db6e0928e79f3e0eb83eb5d3c499ed98da4c4f4"
-url = "https://github.com/sigstore/cosign/releases/download/v2.6.3/cosign-linux-amd64"
+checksum = "sha256:c956e5dfcac53d52bcf058360d579472f0c1d2d9b69f55209e256fe7783f4c74"
+url = "https://github.com/sigstore/cosign/releases/download/v3.0.6/cosign-linux-amd64"
+provenance = "cosign"
 
 [tools."aqua:sigstore/cosign"."platforms.linux-x64-musl"]
-checksum = "sha256:7c78a7f2efc00088bd788a758db6e0928e79f3e0eb83eb5d3c499ed98da4c4f4"
-url = "https://github.com/sigstore/cosign/releases/download/v2.6.3/cosign-linux-amd64"
+checksum = "sha256:c956e5dfcac53d52bcf058360d579472f0c1d2d9b69f55209e256fe7783f4c74"
+url = "https://github.com/sigstore/cosign/releases/download/v3.0.6/cosign-linux-amd64"
+provenance = "cosign"
 
 [tools."aqua:sigstore/cosign"."platforms.macos-arm64"]
-checksum = "sha256:ff497a698f125f3130b04f000b2cb0dd163bcaf00b5e776ef536035e6d0b3f3e"
-url = "https://github.com/sigstore/cosign/releases/download/v2.6.3/cosign-darwin-arm64"
+checksum = "sha256:5fadd012ae6381a6a29ff86a7d39aa873878852f1073fc90b15995961ecfb084"
+url = "https://github.com/sigstore/cosign/releases/download/v3.0.6/cosign-darwin-arm64"
+provenance = "cosign"
 
 [tools."aqua:sigstore/cosign"."platforms.macos-x64"]
-checksum = "sha256:5715d61dd00a9b6dcb344de14910b434145855b7f82690b94183c553ac1b68be"
-url = "https://github.com/sigstore/cosign/releases/download/v2.6.3/cosign-darwin-amd64"
+checksum = "sha256:4c3e7af8372d3ca3296e62fa56f23fcbb5721cc6ac1827900d398f110d7cd280"
+url = "https://github.com/sigstore/cosign/releases/download/v3.0.6/cosign-darwin-amd64"
+provenance = "cosign"
 
 [tools."aqua:sigstore/cosign"."platforms.windows-x64"]
-checksum = "sha256:2264ea5867077b9e070161648e8c18544decac351f5f3a7edaea43c233ce2e36"
-url = "https://github.com/sigstore/cosign/releases/download/v2.6.3/cosign-windows-amd64.exe"
+checksum = "sha256:9b85a88ebff2d9dd30ff4984a6f61f2cedc232dd87d81fa7f2ff3c0ed96c241c"
+url = "https://github.com/sigstore/cosign/releases/download/v3.0.6/cosign-windows-amd64.exe"
+provenance = "cosign"
 
 [[tools."aqua:zizmorcore/zizmor"]]
 version = "1.25.2"
