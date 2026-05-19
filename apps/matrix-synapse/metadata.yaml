@@ -3,4 +3,4 @@ artifactName: matrix-synapse
 source:
   helm:
     registry: https://ananace.gitlab.io/charts
-    version: 3.12.26
+    version: 3.12.28
