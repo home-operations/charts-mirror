@@ -6,10 +6,15 @@ on:
   merge_group:
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   prepare:
     name: Prepare
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     outputs:
       changed-files: ${{ steps.changed-files.outputs.changed_files }}
     steps:
@@ -21,9 +26,12 @@ jobs:
 
   changed:
     if: ${{ needs.prepare.outputs.changed-files != '[]' }}
-    needs: ["prepare"]
+    needs:
+      - "prepare"
     name: Get Changed Apps
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     outputs:
       apps: ${{ steps.apps.outputs.apps }}
     steps:
@@ -40,7 +48,8 @@ jobs:
 
   build:
     if: ${{ needs.changed.outputs.apps != '[]' }}
-    needs: ["changed"]
+    needs:
+      - "changed"
     name: Build ${{ matrix.app.artifactName }}
     uses: ./.github/workflows/app-builder.yaml
     permissions:
@@ -58,9 +67,11 @@ jobs:
 
   status:
     if: ${{ !cancelled() }}
-    needs: ["build"]
+    needs:
+      - "build"
     name: Build Success
     runs-on: ubuntu-latest
+    permissions: {}
     steps:
       - name: Any jobs failed?
         if: ${{ contains(needs.*.result, 'failure') }}

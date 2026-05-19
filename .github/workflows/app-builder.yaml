@@ -17,6 +17,13 @@ on:
         type: boolean
         description: Release
         required: true
+    secrets:
+      BOT_CLIENT_ID:
+        required: false
+      BOT_APP_PRIVATE_KEY:
+        required: false
+      DISCORD_WEBHOOK:
+        required: false
 
 jobs:
   plan:
