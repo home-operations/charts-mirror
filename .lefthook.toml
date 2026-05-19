@@ -12,7 +12,7 @@ run = "shellcheck {staged_files}"
 
 [pre-commit.commands.mise-lock]
 glob = [".mise.toml"]
-run = "MISE_LOCKED=0 mise lock && git add mise.lock"
+run = "mise lock && git add mise.lock"
 
 [pre-commit.commands.zizmor]
 glob = [".github/workflows/*.yaml", ".github/actions/**/action.yaml"]
