@@ -66,7 +66,7 @@ jobs:
     name: Build (${{ needs.plan.outputs.version }})
     runs-on: ubuntu-latest
     needs:
-      - "plan"
+      - plan
     env:
       ARTIFACT_NAME: ${{ inputs.artifactName }}
       SOURCE: ${{ inputs.source }}
@@ -133,8 +133,8 @@ jobs:
     if: ${{ inputs.release && needs.plan.outputs.app-exists != 'true' }}
     name: Release
     needs:
-      - "plan"
-      - "build"
+      - plan
+      - build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -162,25 +162,28 @@ jobs:
           token: ${{ steps.app-token.outputs.token }}
 
       - name: Create Release
-        # zizmor: ignore[superfluous-actions]
-        uses: ncipollo/release-action@339a81892b84b4eeb0f6e744e4574d79d0d9b8dd # v1.21.0
-        with:
-          body: |
-            > [!NOTE]
-            > A new chart has been added.
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          TAG: ${{ steps.release.outputs.tag }}
+          ARTIFACT_NAME: ${{ inputs.artifactName }}
+          REPO_NAME: ${{ steps.repository.outputs.name }}
+        run: |
+          cat > release-notes.md <<EOF
+          > [!NOTE]
+          > A new chart has been added.
 
-            ## 📦 Chart
+          ## 📦 Chart
 
-            **Name**: [${{ inputs.artifactName }}](https://github.com/${{ github.repository }}/pkgs/container/${{ steps.repository.outputs.name }}%2F${{ inputs.artifactName }})
-          tag: ${{ steps.release.outputs.tag }}
-          token: ${{ steps.app-token.outputs.token }}
+          **Name**: [${ARTIFACT_NAME}](https://github.com/${{ github.repository }}/pkgs/container/${REPO_NAME}%2F${ARTIFACT_NAME})
+          EOF
+          gh release create "$TAG" --notes-file release-notes.md
 
   announce:
     if: ${{ inputs.release && !cancelled() }}
     needs:
-      - "plan"
-      - "build"
-      - "release"
+      - plan
+      - build
+      - release
     name: Notify
     runs-on: ubuntu-latest
     steps:

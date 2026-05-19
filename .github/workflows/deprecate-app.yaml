@@ -18,10 +18,14 @@ on:
         description: Create Release
         default: true
 
+permissions: {}
+
 jobs:
   plan:
     name: Plan (${{ inputs.chartName }})
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     outputs:
       pull-number: ${{ steps.pr.outputs.pull-request-number }}
     steps:
@@ -36,19 +40,23 @@ jobs:
         with:
           client-id: ${{ secrets.BOT_CLIENT_ID }}
           private-key: ${{ secrets.BOT_APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
 
-      - name: Validate App Directory
+      - name: Validate Chart Directory
         env:
-          APP: ${{ inputs.app }}
+          CHART_NAME: ${{ inputs.chartName }}
         run: |-
-          if [[ ! -d "./apps/${APP}" ]]; then
-            echo "::error::App directory './apps/${APP}' does not exist"
+          if [[ ! -d "./apps/${CHART_NAME}" ]]; then
+            echo "::error::Chart directory './apps/${CHART_NAME}' does not exist"
             exit 1
           fi
 
       - name: Delete Chart
+        env:
+          CHART_NAME: ${{ inputs.chartName }}
         run: |
-          rm -rf ./apps/${{ inputs.chartName }}
+          rm -rf "./apps/${CHART_NAME}"
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
@@ -69,6 +77,8 @@ jobs:
     needs:
       - plan
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -81,16 +91,20 @@ jobs:
         with:
           client-id: ${{ secrets.BOT_CLIENT_ID }}
           private-key: ${{ secrets.BOT_APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
 
       - name: Merge Pull Request
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          PULL_NUMBER: ${{ needs.plan.outputs.pull-number }}
         with:
           github-token: ${{ steps.app-token.outputs.token }}
           script: |
             await github.rest.pulls.merge({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              pull_number: ${{ needs.plan.outputs.pull-number }},
+              pull_number: Number(process.env.PULL_NUMBER),
               merge_method: 'squash',
             });
 
@@ -100,6 +114,8 @@ jobs:
     needs:
       - merge
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -112,6 +128,7 @@ jobs:
         with:
           client-id: ${{ secrets.BOT_CLIENT_ID }}
           private-key: ${{ secrets.BOT_APP_PRIVATE_KEY }}
+          permission-contents: write
 
       - name: Get Release Tag
         uses: ./.github/actions/release-tag
@@ -120,16 +137,20 @@ jobs:
           token: ${{ steps.app-token.outputs.token }}
 
       - name: Create Release
-        uses: ncipollo/release-action@339a81892b84b4eeb0f6e744e4574d79d0d9b8dd # v1.21.0
-        with:
-          body: |
-            > [!WARNING]
-            > A chart has been deprecated and will no longer receive updates.
-            > After **6 months** from now, its image will be **removed** from our container registry.
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          TAG: ${{ steps.release.outputs.tag }}
+          CHART_NAME: ${{ inputs.chartName }}
+          REASON: ${{ inputs.reason }}
+        run: |-
+          cat > release-notes.md <<EOF
+          > [!WARNING]
+          > A chart has been deprecated and will no longer receive updates.
+          > After **6 months** from now, its image will be **removed** from our container registry.
 
-            ## 📦 Chart
+          ## 📦 Chart
 
-            **Name**: ${{ inputs.chartName }}
-            **Reason**: ${{ inputs.reason }}
-          tag: ${{ steps.release.outputs.tag }}
-          token: ${{ steps.app-token.outputs.token }}
+          **Name**: ${CHART_NAME}
+          **Reason**: ${REASON}
+          EOF
+          gh release create "$TAG" --notes-file release-notes.md
