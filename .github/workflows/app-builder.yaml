@@ -88,6 +88,7 @@ jobs:
         uses: jdx/mise-action@1648a7812b9aeae629881980618f079932869151 # v4.0.1
         with:
           experimental: true
+          install_args: --locked
 
       - if: ${{ inputs.release }}
         name: Login to GitHub Container Registry
