@@ -1,12 +1,12 @@
 [tools]
-"aqua:helm/helm" = "4.2.0"
-"aqua:sigstore/cosign" = "3.0.6"
-"aqua:jqlang/jq" = "1.8.1"
-"aqua:mikefarah/yq" = "4.53.2"
-"aqua:evilmartians/lefthook" = "2.1.8"
-"aqua:google/yamlfmt" = "0.21.0"
-"aqua:koalaman/shellcheck" = "0.11.0"
-"aqua:zizmorcore/zizmor" = "1.25.2"
+cosign = "3.0.6"
+helm = "4.2.0"
+jq = "1.8.1"
+lefthook = "2.1.8"
+shellcheck = "0.11.0"
+yamlfmt = "0.21.0"
+yq = "4.53.2"
+zizmor = "1.25.2"
 
 [hooks]
 postinstall = "lefthook install"
