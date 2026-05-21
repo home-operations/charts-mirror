@@ -1,5 +1,6 @@
 ---
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
 name: Deprecate Chart
 
 on:
@@ -46,7 +47,7 @@ jobs:
       - name: Validate Chart Directory
         env:
           CHART_NAME: ${{ inputs.chartName }}
-        run: |-
+        run: |
           if [[ ! -d "./apps/${CHART_NAME}" ]]; then
             echo "::error::Chart directory './apps/${CHART_NAME}' does not exist"
             exit 1
