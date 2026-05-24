@@ -1,6 +1,0 @@
----
-artifactName: authelia
-source:
-  helm:
-    registry: https://charts.authelia.com
-    version: 0.11.5
