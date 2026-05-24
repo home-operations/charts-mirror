@@ -1,0 +1,6 @@
+---
+artifactName: mariadb-operator
+source:
+  helm:
+    registry: https://helm.mariadb.com/mariadb-operator
+    version: 26.3.0
