@@ -18,10 +18,7 @@
       "type": "object",
       "description": "Where to fetch the chart from. Exactly one of `helm` or `git` must be set.",
       "additionalProperties": false,
-      "oneOf": [
-        { "required": ["helm"] },
-        { "required": ["git"] }
-      ],
+      "oneOf": [{ "required": ["helm"] }, { "required": ["git"] }],
       "properties": {
         "helm": {
           "type": "object",
