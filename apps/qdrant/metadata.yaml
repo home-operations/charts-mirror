@@ -3,4 +3,4 @@ artifactName: qdrant
 source:
   helm:
     registry: https://qdrant.github.io/qdrant-helm
-    version: 1.18.0
+    version: 1.18.1
