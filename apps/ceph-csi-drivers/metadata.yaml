@@ -1,0 +1,6 @@
+---
+artifactName: ceph-csi-drivers
+source:
+  helm:
+    registry: https://ceph.github.io/ceph-csi-operator
+    version: 0.2.0
