@@ -1,0 +1,7 @@
+---
+artifactName: infisical-standalone-postgres
+source:
+  git:
+    repository: https://github.com/Infisical/infisical
+    path: ./helm-charts/infisical-standalone-postgres
+    tag: v0.159.29
