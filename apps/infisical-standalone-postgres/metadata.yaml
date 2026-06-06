@@ -4,4 +4,4 @@ source:
   git:
     repository: https://github.com/Infisical/infisical
     path: ./helm-charts/infisical-standalone-postgres
-    tag: v0.159.29
+    tag: v0.160.11
