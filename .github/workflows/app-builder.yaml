@@ -116,7 +116,14 @@ jobs:
           tag=$(jq -r '.git.tag' <<< "$SOURCE")
           git clone --depth 1 --branch "$tag" "$repository" ./git-src
           mkdir -p ./src
-          cp -r "./git-src/${path}" "./src/$(basename "$path")"
+          chart="./src/$(basename "$path")"
+          cp -r "./git-src/${path}" "$chart"
+          # A git chart isn't packaged with its dependencies, so vendor them before
+          # packaging. Register any http(s) dependency repos (helm requires it); OCI
+          # (oci://) dependencies resolve directly.
+          yq -r '.dependencies[] | select(.repository // "" | test("^http")) | .name + " " + .repository' "$chart/Chart.yaml" \
+            | while read -r name repo; do helm repo add "$name" "$repo"; done
+          helm dependency build "$chart"
 
       - name: Override Chart Name
         run: |
