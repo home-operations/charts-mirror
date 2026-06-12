@@ -3,4 +3,4 @@ artifactName: alloy
 source:
   helm:
     registry: https://grafana.github.io/helm-charts
-    version: 1.9.0
+    version: 1.10.0
