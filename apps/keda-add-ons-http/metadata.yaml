@@ -3,4 +3,4 @@ artifactName: keda-add-ons-http
 source:
   helm:
     registry: https://kedacore.github.io/charts
-    version: 0.14.1
+    version: 0.15.0
