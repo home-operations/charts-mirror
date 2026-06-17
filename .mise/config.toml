@@ -1,6 +1,6 @@
 [tools]
 cosign = "3.1.1"
-helm = "4.2.0"
+helm = "4.2.2"
 jq = "1.8.1"
 lefthook = "2.1.9"
 oxfmt = "0.55.0"
