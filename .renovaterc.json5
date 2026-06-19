@@ -25,7 +25,7 @@
   ],
   packageRules: [
     {
-      description: "Auto-merge mirrored charts (Helm + git sources)",
+      description: "Auto-merge mirrored charts",
       matchDatasources: ["helm", "git-tags"],
       automerge: true,
       automergeType: "pr",
