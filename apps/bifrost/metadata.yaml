@@ -1,0 +1,6 @@
+---
+artifactName: bifrost
+source:
+  helm:
+    registry: https://maximhq.github.io/bifrost/helm-charts
+    version: 2.1.24
