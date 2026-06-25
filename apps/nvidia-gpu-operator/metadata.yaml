@@ -3,5 +3,5 @@ artifactName: nvidia-gpu-operator
 source:
   helm:
     registry: https://helm.ngc.nvidia.com/nvidia
-    version: v26.3.2
+    version: v26.3.3
     chart: gpu-operator
