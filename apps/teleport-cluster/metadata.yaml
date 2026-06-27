@@ -3,4 +3,4 @@ artifactName: teleport-cluster
 source:
   helm:
     registry: https://charts.releases.teleport.dev/
-    version: 18.9.1
+    version: 18.9.2
