@@ -3,4 +3,4 @@ artifactName: llmkube
 source:
   helm:
     registry: https://defilantech.github.io/LLMKube/
-    version: 0.8.20
+    version: 0.8.21
