@@ -3,4 +3,4 @@ artifactName: tailscale-operator
 source:
   helm:
     registry: https://pkgs.tailscale.com/helmcharts
-    version: 1.98.4
+    version: 1.98.9
