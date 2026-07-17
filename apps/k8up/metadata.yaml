@@ -3,4 +3,4 @@ artifactName: k8up
 source:
   helm:
     registry: https://k8up-io.github.io/k8up
-    version: 4.9.0
+    version: 4.10.0
