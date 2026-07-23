@@ -1,0 +1,6 @@
+---
+artifactName: harbor
+source:
+  helm:
+    registry: https://helm.goharbor.io
+    version: 1.19.1
