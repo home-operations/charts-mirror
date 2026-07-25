@@ -28,7 +28,6 @@
       description: "Auto-merge mirrored charts",
       matchDatasources: ["helm", "git-tags"],
       automerge: true,
-      automergeType: "pr",
       matchUpdateTypes: ["major", "minor", "patch"],
       ignoreTests: false,
     },
