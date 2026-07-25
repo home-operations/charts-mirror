@@ -69,6 +69,8 @@ jobs:
     if: ${{ !cancelled() }}
     needs:
       - "build"
+      - "changed"
+      - "prepare"
     name: Build Success
     runs-on: ubuntu-24.04
     permissions: {}
