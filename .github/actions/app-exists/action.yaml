@@ -19,9 +19,11 @@ runs:
     - name: Application Exists
       id: application
       uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+      env:
+        APP_NAME: ${{ inputs.app }}
       with:
         script: |
-          const applicationName = '${{ inputs.app }}';
+          const applicationName = process.env.APP_NAME;
 
           const { data: user } = await github.rest.users.getByUsername({
               username: context.repo.owner,
