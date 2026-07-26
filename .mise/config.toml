@@ -1,4 +1,5 @@
 [tools]
+actionlint = "1.7.12"
 cosign = "3.1.2"
 helm = "4.2.3"
 jq = "1.8.2"
