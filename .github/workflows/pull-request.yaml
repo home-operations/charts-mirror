@@ -51,7 +51,7 @@ jobs:
     needs:
       - "changed"
     name: Build ${{ matrix.app.artifactName }}
-    uses: ./.github/workflows/app-builder.yaml
+    uses: $/.github/workflows/app-builder.yaml
     permissions:
       contents: read
       packages: read
