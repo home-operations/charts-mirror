@@ -3,4 +3,4 @@ artifactName: kubeai
 source:
   helm:
     registry: https://www.kubeai.org
-    version: 0.23.3
+    version: 0.23.4
