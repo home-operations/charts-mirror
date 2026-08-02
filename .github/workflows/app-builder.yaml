@@ -34,11 +34,6 @@ jobs:
       source-type: ${{ steps.source.outputs.type }}
       version: ${{ steps.source.outputs.version }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-
       - name: Get Repository Name
         id: repository
         run: |
@@ -64,7 +59,7 @@ jobs:
           fi
 
       - name: Check For Exising Chart
-        uses: ./.github/actions/app-exists
+        uses: $/.github/actions/app-exists
         id: app
         with:
           app: ${{ steps.repository.outputs.name }}/${{ inputs.artifactName }}
@@ -152,11 +147,6 @@ jobs:
       - build
     runs-on: ubuntu-24.04
     steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-
       - name: Get Repository Name
         id: repository
         run: |
@@ -171,7 +161,7 @@ jobs:
           permission-contents: write
 
       - name: Get Release Tag
-        uses: ./.github/actions/release-tag
+        uses: $/.github/actions/release-tag
         id: release
         with:
           token: ${{ steps.app-token.outputs.token }}
@@ -179,6 +169,7 @@ jobs:
       - name: Create Release
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          GH_REPO: ${{ github.repository }}
           TAG: ${{ steps.release.outputs.tag }}
           ARTIFACT_NAME: ${{ inputs.artifactName }}
           REPO_NAME: ${{ steps.repository.outputs.name }}
