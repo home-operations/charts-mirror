@@ -1,0 +1,109 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Flag Untracked Charts
+
+on:
+  schedule:
+    - cron: 0 5 * * *
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  flag:
+    name: Flag Untracked Charts
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      issues: write
+      packages: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Flag Untracked Charts
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const fs = require('fs');
+
+            const issueTitle = 'Untracked OCI charts in GHCR';
+
+            const tracked = new Set(
+              fs.readdirSync('apps', { withFileTypes: true })
+                .filter((entry) => entry.isDirectory())
+                .map((entry) => {
+                  const metadata = fs.readFileSync(`apps/${entry.name}/metadata.yaml`, 'utf8');
+                  return metadata.match(/^artifactName:\s*(\S+)/m)?.[1] ?? entry.name;
+                })
+            );
+
+            const packages = await github.paginate(github.rest.packages.listPackagesForOrganization, {
+              org: context.repo.owner,
+              package_type: 'container',
+              per_page: 100,
+            });
+
+            const prefix = `${context.repo.repo}/`;
+            const untracked = packages
+              .map((pkg) => pkg.name)
+              .filter((name) => name.startsWith(prefix))
+              .map((name) => name.slice(prefix.length))
+              .filter((name) => !tracked.has(name))
+              .sort();
+
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              per_page: 100,
+            });
+            const existing = issues.find((issue) => !issue.pull_request && issue.title === issueTitle);
+
+            if (untracked.length === 0) {
+              core.info('All GHCR charts are tracked under apps/');
+              if (existing) {
+                await github.rest.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: existing.number,
+                  state: 'closed',
+                  state_reason: 'completed',
+                });
+                core.info(`Closed issue #${existing.number}`);
+              }
+              return;
+            }
+
+            for (const name of untracked) {
+              core.warning(`Chart '${name}' exists in GHCR but is not tracked under apps/`);
+            }
+
+            const body = [
+              'The following OCI charts exist in GHCR but are no longer tracked under `apps/`:',
+              '',
+              ...untracked.map((name) => `- \`ghcr.io/${context.repo.owner}/${context.repo.repo}/${name}\``),
+              '',
+              `_Last checked by [this workflow run](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})._`,
+            ].join('\n');
+
+            if (existing) {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body,
+              });
+              core.info(`Updated issue #${existing.number}`);
+            } else {
+              const { data: issue } = await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: issueTitle,
+                body,
+              });
+              core.info(`Opened issue #${issue.number}`);
+            }
