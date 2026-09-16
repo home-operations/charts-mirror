@@ -1,0 +1,6 @@
+---
+artifactName: geopulse
+source:
+  helm:
+    registry: https://tess1o.github.io/geopulse/charts
+    version: 1.39.0
