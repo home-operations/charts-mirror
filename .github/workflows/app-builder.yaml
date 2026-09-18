@@ -28,7 +28,7 @@ on:
 jobs:
   plan:
     name: Plan
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     outputs:
       app-exists: ${{ steps.app.outputs.exists }}
       source-type: ${{ steps.source.outputs.type }}
@@ -66,7 +66,7 @@ jobs:
 
   build:
     name: Build (${{ needs.plan.outputs.version }})
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     needs:
       - plan
     env:
@@ -145,7 +145,7 @@ jobs:
     needs:
       - plan
       - build
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - name: Get Repository Name
         id: repository
@@ -191,7 +191,7 @@ jobs:
       - build
       - release
     name: Notify
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - if: ${{ contains(needs.*.result, 'failure') }}
         name: Send Discord Webhook
