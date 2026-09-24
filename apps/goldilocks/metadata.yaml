@@ -3,4 +3,4 @@ artifactName: goldilocks
 source:
   helm:
     registry: https://charts.fairwinds.com/stable
-    version: 11.1.1
+    version: 11.2.0
