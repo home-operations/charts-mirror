@@ -16,13 +16,21 @@ jobs:
     permissions:
       contents: read
     outputs:
-      changed-files: ${{ steps.changed-files.outputs.changed_files }}
+      changed-files: ${{ steps.changed-files.outputs.all_changed_files }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
       - name: Get Changed Files
         id: changed-files
-        uses: bjw-s-labs/action-changed-files@147be9638332cf68fd60714a610509d7a9360d60 # v0.7.0
+        uses: tj-actions/changed-files@9426d40962ed5378910ee2e21d5f8c6fcbf2dd96 # v47.0.6
         with:
-          patterns: apps/**/metadata.yaml
+          escape_json: false
+          files: apps/**/metadata.yaml
+          json: true
 
   changed:
     if: ${{ needs.prepare.outputs.changed-files != '[]' }}
