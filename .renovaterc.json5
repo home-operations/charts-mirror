@@ -1,8 +1,6 @@
 {
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
   extends: ["github>home-operations/renovate-config"],
-  // Each mirrored chart bump is its own PR; don't queue them behind the org preset's prHourlyLimit.
-  prHourlyLimit: 0,
   customManagers: [
     {
       customType: "regex",
@@ -32,6 +30,12 @@
       automerge: true,
       matchUpdateTypes: ["major", "minor", "patch"],
       ignoreTests: false,
+    },
+    {
+      description: "Exempt chart updates from prHourlyLimit and create them last, since they still add to the hourly PR count",
+      matchFileNames: ["apps/**"],
+      prHourlyLimit: 0,
+      prPriority: -1,
     },
   ],
 }
