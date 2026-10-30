@@ -1,0 +1,6 @@
+---
+artifactName: mattermost-operator
+source:
+  helm:
+    registry: https://helm.mattermost.com
+    version: 1.0.5

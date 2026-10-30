@@ -1,0 +1,6 @@
+---
+artifactName: glitchtip
+source:
+  helm:
+    registry: https://gitlab.com/api/v4/projects/16325141/packages/helm/stable
+    version: 9.1.1

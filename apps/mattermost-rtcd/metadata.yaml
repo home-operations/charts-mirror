@@ -1,0 +1,6 @@
+---
+artifactName: mattermost-rtcd
+source:
+  helm:
+    registry: https://helm.mattermost.com
+    version: 1.4.1

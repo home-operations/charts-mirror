@@ -1,6 +1,0 @@
----
-artifactName: dex
-source:
-  helm:
-    registry: https://charts.dexidp.io
-    version: 0.24.1

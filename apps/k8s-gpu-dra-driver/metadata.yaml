@@ -1,0 +1,6 @@
+---
+artifactName: k8s-gpu-dra-driver
+source:
+  helm:
+    registry: https://rocm.github.io/k8s-gpu-dra-driver
+    version: v1.0.1

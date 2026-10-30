@@ -3,4 +3,4 @@ artifactName: kubernetes-replicator
 source:
   helm:
     registry: https://helm.mittwald.de
-    version: 2.12.3
+    version: 2.12.4

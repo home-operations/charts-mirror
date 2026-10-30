@@ -23,19 +23,19 @@ permissions: {}
 jobs:
   plan:
     name: Plan (${{ inputs.chartName }})
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
     outputs:
       pull-number: ${{ steps.pr.outputs.pull-request-number }}
     steps:
       - name: Checkout
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
       - name: Generate Token
-        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
         id: app-token
         with:
           client-id: ${{ secrets.BOT_CLIENT_ID }}
@@ -66,6 +66,7 @@ jobs:
             **Reason**: ${{ inputs.reason }}
           branch: deprecate/${{ inputs.chartName }}
           commit-message: "feat: deprecate ${{ inputs.chartName }}"
+          labels: ${{ inputs.release && 'deprecation' || '' }}
           sign-commits: true
           signoff: true
           title: "feat: deprecate ${{ inputs.chartName }}"
@@ -76,17 +77,12 @@ jobs:
     name: Merge (${{ inputs.chartName }})
     needs:
       - plan
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
     steps:
-      - name: Checkout
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
-        with:
-          persist-credentials: false
-
       - name: Generate Token
-        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
         id: app-token
         with:
           client-id: ${{ secrets.BOT_CLIENT_ID }}
@@ -101,56 +97,23 @@ jobs:
         with:
           github-token: ${{ steps.app-token.outputs.token }}
           script: |
-            await github.rest.pulls.merge({
+            const pull_number = Number(process.env.PULL_NUMBER);
+            const { data: pr } = await github.rest.pulls.get({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              pull_number: Number(process.env.PULL_NUMBER),
-              merge_method: 'squash',
+              pull_number,
             });
-
-  announce:
-    if: ${{ inputs.release }}
-    name: Announce (${{ inputs.chartName }})
-    needs:
-      - merge
-    runs-on: ubuntu-24.04
-    permissions:
-      contents: read
-    steps:
-      - name: Checkout
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
-        with:
-          persist-credentials: false
-
-      - name: Generate Token
-        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
-        id: app-token
-        with:
-          client-id: ${{ secrets.BOT_CLIENT_ID }}
-          private-key: ${{ secrets.BOT_APP_PRIVATE_KEY }}
-          permission-contents: write
-
-      - name: Get Release Tag
-        uses: ./.github/actions/release-tag
-        id: release
-        with:
-          token: ${{ steps.app-token.outputs.token }}
-
-      - name: Create Release
-        env:
-          GH_TOKEN: ${{ steps.app-token.outputs.token }}
-          TAG: ${{ steps.release.outputs.tag }}
-          CHART_NAME: ${{ inputs.chartName }}
-          REASON: ${{ inputs.reason }}
-        run: |-
-          cat > release-notes.md <<EOF
-          > [!WARNING]
-          > A chart has been deprecated and will no longer receive updates.
-          > After **6 months** from now, its image will be **removed** from our container registry.
-
-          ## 📦 Chart
-
-          **Name**: ${CHART_NAME}
-          **Reason**: ${REASON}
-          EOF
-          gh release create "$TAG" --notes-file release-notes.md
+            try {
+              await github.graphql(
+                'mutation($id: ID!) { enqueuePullRequest(input: { pullRequestId: $id }) { clientMutationId } }',
+                { id: pr.node_id },
+              );
+              core.info(`Added #${pull_number} to the merge queue`);
+            } catch (error) {
+              // enqueue is rejected while required checks are still running
+              core.info(`Enqueue failed (${error.message}), enabling auto-merge instead`);
+              await github.graphql(
+                'mutation($id: ID!) { enablePullRequestAutoMerge(input: { pullRequestId: $id }) { clientMutationId } }',
+                { id: pr.node_id },
+              );
+            }

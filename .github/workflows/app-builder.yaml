@@ -28,17 +28,12 @@ on:
 jobs:
   plan:
     name: Plan
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     outputs:
       app-exists: ${{ steps.app.outputs.exists }}
       source-type: ${{ steps.source.outputs.type }}
       version: ${{ steps.source.outputs.version }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
-        with:
-          persist-credentials: false
-
       - name: Get Repository Name
         id: repository
         run: |
@@ -64,14 +59,14 @@ jobs:
           fi
 
       - name: Check For Exising Chart
-        uses: ./.github/actions/app-exists
+        uses: $/.github/actions/app-exists
         id: app
         with:
           app: ${{ steps.repository.outputs.name }}/${{ inputs.artifactName }}
 
   build:
     name: Build (${{ needs.plan.outputs.version }})
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     needs:
       - plan
     env:
@@ -80,19 +75,19 @@ jobs:
       VERSION: ${{ needs.plan.outputs.version }}
     steps:
       - name: Checkout
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup Mise
-        uses: jdx/mise-action@1648a7812b9aeae629881980618f079932869151 # v4.0.1
+        uses: jdx/mise-action@82a612c5ab8bcda7cc5db6b7e81a8e7584c3dc6e # v5.2.3
         with:
           experimental: true
           install_args: --locked
 
       - if: ${{ inputs.release }}
         name: Login to GitHub Container Registry
-        uses: docker/login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee # v4.2.0
+        uses: docker/login-action@81c6f93d4bc991e510b342a00b419b3bb4efc5c6 # v4.7.0
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -150,20 +145,15 @@ jobs:
     needs:
       - plan
       - build
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
-      - name: Checkout
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
-        with:
-          persist-credentials: false
-
       - name: Get Repository Name
         id: repository
         run: |
           echo "name=${GITHUB_REPOSITORY#*/}" >> $GITHUB_OUTPUT
 
       - name: Generate Token
-        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
         id: app-token
         with:
           client-id: ${{ secrets.BOT_CLIENT_ID }}
@@ -171,7 +161,7 @@ jobs:
           permission-contents: write
 
       - name: Get Release Tag
-        uses: ./.github/actions/release-tag
+        uses: $/.github/actions/release-tag
         id: release
         with:
           token: ${{ steps.app-token.outputs.token }}
@@ -179,6 +169,7 @@ jobs:
       - name: Create Release
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          GH_REPO: ${{ github.repository }}
           TAG: ${{ steps.release.outputs.tag }}
           ARTIFACT_NAME: ${{ inputs.artifactName }}
           REPO_NAME: ${{ steps.repository.outputs.name }}
@@ -200,7 +191,7 @@ jobs:
       - build
       - release
     name: Notify
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - if: ${{ contains(needs.*.result, 'failure') }}
         name: Send Discord Webhook
