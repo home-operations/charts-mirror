@@ -1,0 +1,6 @@
+---
+artifactName: truenas-csi
+source:
+  helm:
+    registry: https://raw.githubusercontent.com/truenas/truenas-csi/master/charts
+    version: 1.4.0
