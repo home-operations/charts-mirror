@@ -50,8 +50,10 @@ jobs:
 
       - name: Extract App Values
         id: apps
+        env:
+          CHANGED_FILES: ${{ join(fromJSON(needs.prepare.outputs.changed-files), ' ') }}
         run: |
-          apps=$(yq eval-all --indent=0 --output-format=json "[.]" ${{ join(fromJSON(needs.prepare.outputs.changed-files), ' ') }})
+          apps=$(yq eval-all --indent=0 --output-format=json "[.]" ${CHANGED_FILES})
           echo "apps=${apps}" >> $GITHUB_OUTPUT
 
   build:
