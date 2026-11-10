@@ -50,8 +50,10 @@ jobs:
 
       - name: Extract App Values
         id: apps
+        env:
+          CHANGED_FILES: ${{ join(fromJSON(needs.prepare.outputs.changed-files), ' ') }}
         run: |
-          apps=$(yq eval-all --indent=0 --output-format=json "[.]" ${{ join(fromJSON(needs.prepare.outputs.changed-files), ' ') }})
+          apps=$(yq eval-all --indent=0 --output-format=json "[.]" ${CHANGED_FILES})
           echo "apps=${apps}" >> $GITHUB_OUTPUT
 
   build:
@@ -85,7 +87,7 @@ jobs:
           persist-credentials: false
 
       - name: Run zizmor
-        uses: zizmorcore/zizmor-action@53290badfa369cb0bf7ad16342cb62c2fa47ac7b # v0.8.0
+        uses: zizmorcore/zizmor-action@45d7276c9ca790aabd705e31ca99c6185c3e76dd # v0.8.1
         with:
           advanced-security: false
           annotations: true
