@@ -1,0 +1,6 @@
+---
+artifactName: element-web
+source:
+  helm:
+    registry: https://ananace.gitlab.io/charts
+    version: 1.4.18
