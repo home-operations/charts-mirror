@@ -1,0 +1,6 @@
+---
+artifactName: palworld
+source:
+  helm:
+    registry: https://caleb-devops.github.io/palworld-helm
+    version: 0.2.2

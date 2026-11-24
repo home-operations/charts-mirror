@@ -1,0 +1,6 @@
+---
+artifactName: cert-manager-webhook-hetzner
+source:
+  helm:
+    registry: https://charts.hetzner.cloud
+    version: 0.9.1

@@ -1,0 +1,6 @@
+---
+artifactName: coturn
+source:
+  helm:
+    registry: https://codeberg.org/api/packages/open-engineering/helm
+    version: 11.0.0

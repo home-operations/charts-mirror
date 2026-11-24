@@ -1,0 +1,6 @@
+---
+artifactName: workadventure
+source:
+  helm:
+    registry: https://charts.workadventu.re/
+    version: v1.35.0

@@ -1,0 +1,6 @@
+---
+artifactName: jellyfin
+source:
+  helm:
+    registry: https://jellyfin.github.io/jellyfin-helm
+    version: 3.7.0

@@ -1,0 +1,6 @@
+---
+artifactName: directus
+source:
+  helm:
+    registry: https://directus-labs.github.io/helm-chart/
+    version: 2.1.0

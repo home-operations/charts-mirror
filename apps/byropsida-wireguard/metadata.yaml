@@ -1,0 +1,6 @@
+---
+artifactName: wireguard
+source:
+  helm:
+    registry: https://bryopsida.github.io/wireguard-chart
+    version: 0.32.0

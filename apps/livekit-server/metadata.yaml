@@ -1,0 +1,6 @@
+---
+artifactName: livekit-server
+source:
+  helm:
+    registry: https://helm.livekit.io
+    version: 1.9.0

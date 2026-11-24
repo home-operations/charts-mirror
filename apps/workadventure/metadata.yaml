@@ -1,0 +1,6 @@
+---
+artifactName: sonarqube
+source:
+  helm:
+    registry: https://SonarSource.github.io/helm-chart-sonarqube
+    version: 2026.5.1007

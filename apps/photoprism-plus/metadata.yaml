@@ -1,0 +1,6 @@
+---
+artifactName: photoprism-plus
+source:
+  helm:
+    registry: https://charts.photoprism.app/photoprism
+    version: 1.1.8

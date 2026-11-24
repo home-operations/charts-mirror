@@ -1,0 +1,6 @@
+---
+artifactName: seaweedfs-operator
+source:
+  helm:
+    registry: https://seaweedfs.github.io/seaweedfs-operator/
+    version: 0.1.49

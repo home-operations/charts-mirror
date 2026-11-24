@@ -1,0 +1,6 @@
+---
+artifactName: influxdb2
+source:
+  helm:
+    registry: https://helm.influxdata.com/
+    version: 2.1.2

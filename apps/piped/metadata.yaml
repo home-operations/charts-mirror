@@ -1,0 +1,6 @@
+---
+artifactName: piped
+source:
+  helm:
+    registry: https://helm.piped.video
+    version: 7.4.19

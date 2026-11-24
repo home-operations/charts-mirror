@@ -1,0 +1,6 @@
+---
+artifactName: vault
+source:
+  helm:
+    registry: https://helm.releases.hashicorp.com
+    version: 0.34.1

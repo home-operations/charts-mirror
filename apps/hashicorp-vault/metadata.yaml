@@ -1,0 +1,6 @@
+---
+artifactName: kubevious
+source:
+  helm:
+    registry: https://helm.kubevious.io
+    version: 1.2.2
